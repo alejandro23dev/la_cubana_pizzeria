@@ -13,6 +13,9 @@
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
 
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
     <!-- Animaciones base -->
     <style>
         @keyframes fadeUp {
@@ -349,12 +352,14 @@
                                         <?php } ?>
 
                                         <!-- BOTÓN -->
-                                        <button class="px-4 py-2 
-                            <?= $isPopular ? 'bg-yellow-400 hover:bg-yellow-500 font-bold' : 'bg-red-600 hover:bg-red-700 text-white'; ?>
-                            rounded-full text-sm transition cursor-pointer">
+                                        <button
+                                            class="btn-order px-4 py-2 rounded-full text-sm transition cursor-pointer
+  <?= $isPopular ? 'bg-yellow-400 hover:bg-yellow-500 font-bold' : 'bg-red-600 hover:bg-red-700 text-white'; ?>"
+                                            data-id="<?= $p->id; ?>"
+                                            data-name="<?= esc($p->name); ?>"
+                                            data-price="<?= $hasOffer ? $p->new_price : $p->price; ?>">
                                             Ordenar
                                         </button>
-
                                     </div>
                                 </div>
                             </div>
@@ -392,6 +397,44 @@
             </div>
         </section>
     </main>
+
+    <div id="cartBox"
+        class="fixed bottom-6 right-6 bg-neutral-900 border border-white/10 rounded-xl p-4 w-72 hidden z-50">
+
+        <h4 class="font-bold mb-2">🛒 Tu pedido</h4>
+
+        <div id="cartItems" class="space-y-2 text-sm max-h-40 overflow-y-auto"></div>
+
+        <div class="border-t border-white/10 mt-3 pt-3 flex justify-between font-bold">
+            <span>Total</span>
+            <span id="cartTotal">$0.00</span>
+        </div>
+
+        <button id="openCheckout"
+            class="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold">
+            Confirmar pedido
+        </button>
+    </div>
+
+    <div id="modalCheckout" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm relative">
+
+            <button id="closeCheckout" class="absolute top-3 right-3 text-white/60">✕</button>
+
+            <h3 class="text-xl font-bold mb-4">Confirmar orden</h3>
+
+            <input id="clientName" type="text" placeholder="Nombre"
+                class="w-full bg-neutral-800 px-3 py-2 rounded mb-3">
+
+            <input id="clientPhone" type="text" placeholder="Teléfono"
+                class="w-full bg-neutral-800 px-3 py-2 rounded mb-4">
+
+            <button id="confirmOrder"
+                class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold">
+                Confirmar orden
+            </button>
+        </div>
+    </div>
 
     <footer id="contact" class="bg-black border-t border-white/10 py-12">
         <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-white/70">
@@ -438,6 +481,23 @@
         </div>
     </footer>
 
+    <div id="modalQty" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm text-center relative">
+
+            <button id="closeQty" class="absolute top-3 right-3 text-white/60 hover:text-white">✕</button>
+
+            <h3 id="qtyProductName" class="text-xl font-bold mb-4"></h3>
+
+            <input type="number" id="qtyInput" min="1" value="1"
+                class="w-full bg-neutral-800 px-3 py-2 rounded text-center mb-6">
+
+            <button id="addToCart"
+                class="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold">
+                Añadir al carrito
+            </button>
+        </div>
+    </div>
+
     <script>
         const menuBtn = document.getElementById('menu-btn');
         const mobileMenu = document.getElementById('mobile-menu');
@@ -469,6 +529,127 @@
         });
     </script>
 
+    <!-- SCRIPT CARRITO -->
+    <script>
+        $(document).ready(function() {
+            let cart = JSON.parse(getCookie('cart') || '[]');
+            let currentProduct = null;
+
+            renderCart();
+
+            /* ---------- ORDENAR ---------- */
+            $('.btn-order').on('click', function() {
+                currentProduct = {
+                    id: $(this).data('id'),
+                    name: $(this).data('name'),
+                    price: parseFloat($(this).data('price'))
+                };
+
+                $('#qtyProductName').text(currentProduct.name);
+                $('#qtyInput').val(1);
+                $('#modalQty').addClass('flex').removeClass('hidden');
+            });
+
+            $('#closeQty').click(() => $('#modalQty').addClass('hidden'));
+
+            $('#addToCart').click(() => {
+                let qty = parseInt($('#qtyInput').val());
+                if (qty < 1) return;
+
+                let found = cart.find(p => p.id === currentProduct.id);
+                if (found) {
+                    found.quantity += qty;
+                } else {
+                    cart.push({
+                        id: currentProduct.id,
+                        name: currentProduct.name,
+                        price: currentProduct.price,
+                        quantity: qty
+                    });
+                }
+
+                saveCart();
+                renderCart();
+                $('#modalQty').addClass('hidden');
+            });
+
+            /* ---------- CARRITO ---------- */
+            function renderCart() {
+                if (cart.length === 0) {
+                    $('#cartBox').addClass('hidden');
+                    return;
+                }
+
+                $('#cartBox').removeClass('hidden');
+                $('#cartItems').html('');
+                let total = 0;
+
+                cart.forEach(p => {
+                    total += p.price * p.quantity;
+                    $('#cartItems').append(
+                        `<div class="flex justify-between">
+          <span>${p.name} x${p.quantity}</span>
+          <span>$${(p.price * p.quantity).toFixed(2)}</span>
+        </div>`
+                    );
+                });
+
+                $('#cartTotal').text('$' + total.toFixed(2));
+            }
+
+            /* ---------- CHECKOUT ---------- */
+            $('#openCheckout').click(() => $('#modalCheckout').addClass('flex').removeClass('hidden'));
+            $('#closeCheckout').click(() => $('#modalCheckout').addClass('hidden'));
+
+            $('#confirmOrder').click(() => {
+                let name = $('#clientName').val().trim();
+                let phone = $('#clientPhone').val().trim();
+
+                if (cart.length === 0 || name === '' || phone === '') {
+                    alert('Debes añadir productos, nombre y teléfono');
+                    return;
+                }
+
+                let products = cart.map(p => ({
+                    id: p.id,
+                    quantity: p.quantity
+                }));
+
+                $.ajax({
+                    url: "<?= base_url('makeOrder'); ?>",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        client_name: name,
+                        client_phone: phone,
+                        products: JSON.stringify(products)
+                    },
+                    success: res => {
+                        if (res.error === 0) {
+                            alert('Orden enviada correctamente');
+                            cart = [];
+                            saveCart();
+                            renderCart();
+                            $('#modalCheckout').addClass('hidden');
+                        } else {
+                            alert('Error al procesar la orden');
+                        }
+                    }
+                });
+            });
+
+            /* ---------- COOKIE ---------- */
+            function saveCart() {
+                document.cookie = "cart=" + JSON.stringify(cart) + ";path=/;max-age=86400";
+            }
+
+            function getCookie(name) {
+                let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? match[2] : null;
+            }
+
+        });
+    </script>
 </body>
 
 </html>

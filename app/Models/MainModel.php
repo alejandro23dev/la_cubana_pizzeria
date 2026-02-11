@@ -29,6 +29,11 @@ class MainModel extends Model
 		return $result;
 	}
 
+	public function makeOrder($data)
+	{
+		return $this->objCreate('orders', $data);
+	}
+
 	public function objUpdate($table, $data, $id)
 	{
 		$query = $this->db->table($table)->where('id', $id)->update($data);
@@ -72,8 +77,57 @@ class MainModel extends Model
 
 	public function getOrders()
 	{
-		return  $this->db->table('orders')
-			->get()->getResult();
+		$orders = $this->db->table('orders')->get()->getResult();
+
+		if (empty($orders)) {
+			return [];
+		}
+
+		foreach ($orders as &$order) {
+
+			$order->products_readable = [];
+
+			if (empty($order->products)) {
+				continue;
+			}
+
+			// Decodificar JSON
+			$products = json_decode($order->products, true);
+
+			if (!is_array($products)) {
+				continue;
+			}
+
+			// Obtener IDs
+			$ids = array_column($products, 'id');
+
+			if (empty($ids)) {
+				continue;
+			}
+
+			// Consultar nombres de productos
+			$items = $this->db->table('pizzas')
+				->select('id, name')
+				->whereIn('id', $ids)
+				->get()
+				->getResultArray();
+
+			// Mapear id => name
+			$map = [];
+			foreach ($items as $i) {
+				$map[$i['id']] = $i['name'];
+			}
+
+			// Construir texto legible
+			foreach ($products as $p) {
+				if (isset($map[$p['id']])) {
+					$order->products_readable[] =
+						$p['quantity'] . ' - ' . $map[$p['id']];
+				}
+			}
+		}
+
+		return $orders;
 	}
 
 	public function getAdmins()

@@ -41,7 +41,16 @@
 
                     <!-- PRODUCTOS (FUTURO) -->
                     <div class="mb-4 text-sm text-white/40 italic">
-                        Productos: próximamente
+                        <?php if (!empty($o->products_readable)) { ?>
+                            <ul class="text-sm text-white/70 space-y-1">
+                                <?php foreach ($o->products_readable as $item) { ?>
+                                    <li>🍕 <?= esc($item); ?></li>
+                                <?php } ?>
+                            </ul>
+                        <?php } else { ?>
+                            <p class="text-white/40 text-sm">Sin productos</p>
+                        <?php } ?>
+
                     </div>
 
                     <!-- ESTADO -->

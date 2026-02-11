@@ -31,6 +31,25 @@ class Home extends BaseController
         return view('home/landing', $data);
     }
 
+    public function makeOrder()
+    {
+        $client_name = $this->objRequest->getPost('client_name');
+        $client_phone = $this->objRequest->getPost('client_phone');
+        $products = $this->objRequest->getPost('products');
+        $orderID = 'LC-' . random_int(1000000, 9999999);
+        
+        $data = [
+            'client_name' => $client_name,
+            'client_phone' => $client_phone,
+            'products' => $products,
+            'order_id' => $orderID
+        ];
+
+        $result = $this->objMainModel->makeOrder($data);
+
+        return $this->response->setJSON($result);
+    }
+
     public function adminLogin()
     {
         return view('admin/auth/login');
