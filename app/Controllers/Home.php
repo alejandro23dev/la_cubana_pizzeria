@@ -2,10 +2,32 @@
 
 namespace App\Controllers;
 
+use App\Models\MainModel;
+
 class Home extends BaseController
 {
-    public function index(): string
+    protected $objSession;
+    protected $objRequest;
+    protected $objMainModel;
+
+    public function __construct()
     {
-        return view('welcome_message');
+        # Session
+        $this->objSession = session();
+        # Services
+        $this->objRequest = \Config\Services::request();
+        # Models
+        $this->objMainModel = new MainModel;
+    }
+
+    public function index()
+    {
+        $pizzas = $this->objMainModel->getPizzas();
+
+        $data = [
+            'pizzas' => $pizzas
+        ];
+
+        return view('home/landing', $data);
     }
 }
