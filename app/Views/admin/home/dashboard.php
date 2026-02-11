@@ -9,7 +9,7 @@
 
         <!-- BOTÓN NUEVA PIZZA -->
         <button id="btnOpenAddPizza"
-            class="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition">
+            class="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition cursor-pointer">
             Nueva Pizza
         </button>
     </div>

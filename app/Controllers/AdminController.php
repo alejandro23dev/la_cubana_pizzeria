@@ -140,7 +140,7 @@ class AdminController extends BaseController
         ]);
     }
 
-        ## ORDERS
+    ## ORDERS
 
     public function orders()
     {
@@ -150,6 +150,16 @@ class AdminController extends BaseController
         $data['page'] = view('admin/home/orders', $data);
 
         return view('admin/mainAdmin', $data);
+    }
+
+    public function updateOrderStatus()
+    {
+        $order_id = $this->objRequest->getPost('order_id');
+        $status = $this->objRequest->getPost('status');
+
+        $result = $this->objMainModel->updateOrderStatus($order_id, $status);
+
+        return $this->response->setJSON($result);
     }
 
     ## ADMINS
@@ -162,6 +172,49 @@ class AdminController extends BaseController
         $data['page'] = view('admin/home/admins', $data);
 
         return view('admin/mainAdmin', $data);
+    }
+
+    public function addAdmin()
+    {
+        $name = trim($this->objRequest->getPost('name'));
+        $email = trim($this->objRequest->getPost('email'));
+        $password = trim($this->objRequest->getPost('password'));
+
+        if ($name === '' || $email === '' || $password === '') {
+            return $this->response->setJSON([
+                'error' => 1,
+                'msg'   => 'Todos los campos son obligatorios'
+            ]);
+        }
+
+        if (!filter_var($email, FILTER_VALIDATE_EMAIL)) {
+            return $this->response->setJSON([
+                'error' => 1,
+                'msg'   => 'Email no válido'
+            ]);
+        }
+
+        // Verificar si el email ya existe
+        if ($this->objMainModel->getAdminByEmail($email)) {
+            return $this->response->setJSON([
+                'error' => 1,
+                'msg'   => 'El email ya está registrado'
+            ]);
+        }
+
+        // Hashear contraseña
+        $hashedPassword = password_hash($password, PASSWORD_DEFAULT);
+
+        // Guardar en BD
+        $this->objMainModel->objCreate('admin', [
+            'user' => $name,
+            'email' => $email,
+            'password' => $hashedPassword
+        ]);
+
+        return $this->response->setJSON([
+            'error' => 0
+        ]);
     }
 
     public function logout()

@@ -6,6 +6,12 @@
             <h1 class="text-3xl font-extrabold mb-2">Administradores</h1>
             <p class="text-white/60">Gestión de administradores · La Cubana</p>
         </div>
+
+        <!-- BOTÓN NUEVO ADMINISTRADOR -->
+        <button id="btnOpenAddAdmin"
+            class="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition cursor-pointer">
+            Nuevo Administrador
+        </button>
     </div>
 
     <!-- CONTENIDO -->
@@ -92,4 +98,76 @@
 
     <?php } ?>
 
+    <!-- MODAL -->
+    <div id="modalAddAdmin"
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+
+        <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
+            <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
+
+            <h2 class="text-2xl font-bold mb-4">Nuevo Administrador</h2>
+
+            <div class="space-y-4">
+                <input type="text" id="txt-name" name="name" placeholder="Usuario" required class="bg-neutral-800 w-full px-3 py-2 rounded">
+                <input type="text" id="txt-email" name="email" placeholder="Correo Electrónico" required class="bg-neutral-800 w-full px-3 py-2 rounded">
+                <input type="password" id="txt-password" name="password" placeholder="Contraseña" required class="bg-neutral-800 w-full px-3 py-2 rounded">
+
+                <button id="btnAddAdmin"
+                    class="w-full bg-red-600 py-2 rounded font-semibold cursor-pointer">
+                    Guardar
+                </button>
+            </div>
+        </div>
+    </div>
+
 </div>
+
+<script>
+    $(document).ready(function() {
+        /* =======================
+           MODAL
+        ======================= */
+        $('#btnOpenAddAdmin').on('click', function() {
+            $('#modalAddAdmin').removeClass('hidden').addClass('flex');
+        });
+
+        $('#closeModal').on('click', function() {
+            $('#modalAddAdmin').addClass('hidden').removeClass('flex');
+            $('#formAddAdmin')[0].reset();
+        });
+
+        $('#btnAddAdmin').on('click', function() {
+            let name = $('#txt-name').val().trim();
+            let email = $('#txt-email').val().trim();
+            let password = $('#txt-password').val().trim();
+
+            if (name === '' || email === '' || password === '') {
+                alert('Por favor, completa todos los campos.');
+                return;
+            }
+
+            $.ajax({
+                type: "POST",
+                url: "<?php echo base_url('admin/addAdmin'); ?>",
+                data: {
+                    name: name,
+                    email: email,
+                    password: password
+                },
+                dataType: "json",
+                success: function(response) {
+                    switch (response.error) {
+                        case 0:
+                            window.location.reload();
+                            break;
+                        case 1:
+                            alert(response.msg);
+                            break;
+                        default:
+                            alert('Error al agregar el administrador. Inténtalo de nuevo.');
+                    }
+                }
+            });
+        });
+    });
+</script>

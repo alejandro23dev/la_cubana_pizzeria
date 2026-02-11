@@ -130,9 +130,22 @@ class MainModel extends Model
 		return $orders;
 	}
 
+	public function updateOrderStatus($id, $status)
+	{
+		$data = ['status' => $status];
+		return $this->objUpdate('orders', $data, $id);
+	}
+
 	public function getAdmins()
 	{
 		return  $this->db->table('admin')
 			->get()->getResult();
+	}
+
+	public function getAdminByEmail($email)
+	{
+		return  $this->db->table('admin')
+			->where('email', $email)
+			->get()->getRow();
 	}
 }

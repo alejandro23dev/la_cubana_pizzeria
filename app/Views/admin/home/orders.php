@@ -75,7 +75,9 @@
                             <option value="3" <?= $o->status == 3 ? 'selected' : ''; ?>>
                                 🚚 Enviada al cliente
                             </option>
-
+                            <option value="4" <?= $o->status == 4 ? 'selected' : ''; ?>>
+                                ❌ Cancelada
+                            </option>
                         </select>
                     </div>
 
@@ -168,5 +170,48 @@
             $('#modalPhone').addClass('hidden').removeClass('flex');
         });
 
+        $('.order-status').each(function() {
+            // guardar estado original
+            $(this).data('original', $(this).val());
+        });
+
+        $('.order-status').on('change', function() {
+
+            let select = $(this);
+            let orderId = select.data('order-id');
+            let newStatus = select.val();
+            let oldStatus = select.data('original');
+
+            if (!confirm('¿Estás seguro de cambiar el estado de esta orden?')) {
+                // volver al estado anterior
+                select.val(oldStatus);
+                return;
+            }
+
+            $.ajax({
+                url: "<?= base_url('admin/updateOrderStatus'); ?>",
+                type: "POST",
+                dataType: "json",
+                data: {
+                    order_id: orderId,
+                    status: newStatus
+                },
+                success: function(res) {
+                    if (res.error === 0) {
+                        // actualizar estado guardado
+                        select.data('original', newStatus);
+                        alert('Estado actualizado correctamente');
+                    } else {
+                        alert('Error al actualizar el estado');
+                        select.val(oldStatus);
+                    }
+                },
+                error: function() {
+                    alert('Error de conexión');
+                    select.val(oldStatus);
+                }
+            });
+
+        });
     });
 </script>

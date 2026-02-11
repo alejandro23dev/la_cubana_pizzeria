@@ -732,3 +732,223 @@ DEBUG - 2026-02-11 22:49:56 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2026-02-11 22:50:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-02-11 22:50:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-02-11 22:50:08 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:56:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:57:05 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:57:50 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:58:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:58:32 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:58:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:58:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:58:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:58:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:59:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:59:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:59:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:59:39 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:59:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 22:59:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:00:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:00:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:00:21 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:00:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:00:58 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:01:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:01:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:02 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:04 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:10 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:11 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:13 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:15 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:02:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:17 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:19 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:54 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:03:57 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:09:28 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:09:42 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:10:22 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-11 23:10:22 --> Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 5 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:10:22 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'name' in 'field list'
+[Method: POST, Route: admin/add_admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 2 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:10:22 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 4 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:10:22 --> [Caused by] mysqli_sql_exception: Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$OtEFqUCv.sjfntu9CV6lu.7VRW3C7jDPpUzB/wvLzAuJuetLiKsMS\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 5 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-11 23:10:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-11 23:10:27 --> Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 5 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:10:27 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'name' in 'field list'
+[Method: POST, Route: admin/add_admin]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 2 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:10:27 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 4 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:10:27 --> [Caused by] mysqli_sql_exception: Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$J1tgtQPpmZ.SWlRPpWKtJuvIj8qO8dF9rnoOxRV9wtJzq2y4o3nsi\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 5 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->add_admin()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-11 23:11:27 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:11:40 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:12:00 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-11 23:12:00 --> Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 5 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->addAdmin()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:12:00 --> CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'name' in 'field list'
+[Method: POST, Route: admin/addAdmin]
+in SYSTEMPATH\Database\BaseConnection.php on line 724.
+ 1 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 2 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 3 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 4 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->addAdmin()
+ 5 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 6 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 7 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 8 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+ 9 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:12:00 --> [Caused by] CodeIgniter\Database\Exceptions\DatabaseException: Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 310.
+ 1 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')')
+ 2 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')')
+ 3 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 4 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 5 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 6 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->addAdmin()
+ 7 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 8 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 9 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+10 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+11 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+CRITICAL - 2026-02-11 23:12:00 --> [Caused by] mysqli_sql_exception: Unknown column 'name' in 'field list'
+in SYSTEMPATH\Database\MySQLi\Connection.php on line 300.
+ 1 SYSTEMPATH\Database\MySQLi\Connection.php(300): mysqli->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')', 0)
+ 2 SYSTEMPATH\Database\BaseConnection.php(769): CodeIgniter\Database\MySQLi\Connection->execute('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')')
+ 3 SYSTEMPATH\Database\BaseConnection.php(686): CodeIgniter\Database\BaseConnection->simpleQuery('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (\'Deniet Frank\', \'deniet@gmail.com\', \'$2y$10$t7kCeQqrIYCKWhf8rQaXieqiOxYxx2DjKVJ0BWk/qqf8D.cZHZLEq\')')
+ 4 SYSTEMPATH\Database\BaseBuilder.php(2345): CodeIgniter\Database\BaseConnection->query('INSERT INTO `admin` (`name`, `email`, `password`) VALUES (:name:, :email:, :password:)', [...], false)
+ 5 APPPATH\Models\MainModel.php(19): CodeIgniter\Database\BaseBuilder->insert([...])
+ 6 APPPATH\Controllers\AdminController.php(209): App\Models\MainModel->objCreate('admin', [...])
+ 7 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\AdminController->addAdmin()
+ 8 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\AdminController))
+ 9 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+10 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+11 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+12 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-11 23:12:29 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:12:30 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:12:51 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:06 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:07 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:14 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:23 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:33 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:34 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:36 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:37 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-11 23:13:43 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

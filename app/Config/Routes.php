@@ -18,6 +18,10 @@ $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
     $routes->post('deletePizza', 'AdminController::deletePizza');
 
     $routes->get('admins', 'AdminController::admins');
+    $routes->post('addAdmin', 'AdminController::addAdmin');
+
     $routes->get('orders', 'AdminController::orders');
+    $routes->post('updateOrderStatus', 'AdminController::updateOrderStatus');
+
     $routes->post('logout', 'AdminController::logout');
 });
