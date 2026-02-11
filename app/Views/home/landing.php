@@ -488,7 +488,13 @@
 
             <h3 id="qtyProductName" class="text-xl font-bold mb-4"></h3>
 
-            <input type="number" id="qtyInput" min="1" value="1"
+            <input
+                type="number"
+                id="qtyInput"
+                min="1"
+                step="1"
+                inputmode="numeric"
+                pattern="[0-9]*"
                 class="w-full bg-neutral-800 px-3 py-2 rounded text-center mb-6">
 
             <button id="addToCart"
@@ -553,10 +559,19 @@
             $('#closeQty').click(() => $('#modalQty').addClass('hidden'));
 
             $('#addToCart').click(() => {
-                let qty = parseInt($('#qtyInput').val());
-                if (qty < 1) return;
+                let qtyRaw = $('#qtyInput').val();
+
+                // convertir y validar
+                let qty = parseInt(qtyRaw, 10);
+
+                if (isNaN(qty) || qty < 1) {
+                    alert('La cantidad mínima es 1');
+                    $('#qtyInput').val(1).focus();
+                    return;
+                }
 
                 let found = cart.find(p => p.id === currentProduct.id);
+
                 if (found) {
                     found.quantity += qty;
                 } else {
@@ -605,6 +620,21 @@
                 let name = $('#clientName').val().trim();
                 let phone = $('#clientPhone').val().trim();
 
+                let nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,}$/;
+                let phoneRegex = /^\+?[0-9]{7,15}$/;
+
+                if (!nameRegex.test(name)) {
+                    alert('El nombre solo puede contener letras');
+                    $('#clientName').focus();
+                    return;
+                }
+
+                if (!phoneRegex.test(phone)) {
+                    alert('Teléfono inválido');
+                    $('#clientPhone').focus();
+                    return;
+                }
+
                 if (cart.length === 0 || name === '' || phone === '') {
                     alert('Debes añadir productos, nombre y teléfono');
                     return;
@@ -647,6 +677,26 @@
                 let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
                 return match ? match[2] : null;
             }
+
+            $('#clientName').on('input', function() {
+                this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
+            });
+
+            $('#clientPhone').on('input', function() {
+                // permitir solo + y números
+                this.value = this.value.replace(/[^0-9+]/g, '');
+
+                // solo un +
+                if ((this.value.match(/\+/g) || []).length > 1) {
+                    this.value = this.value.replace(/\+/g, '');
+                }
+
+                // máximo 15 caracteres
+                if (this.value.length > 15) {
+                    this.value = this.value.slice(0, 15);
+                }
+            });
+
 
         });
     </script>
