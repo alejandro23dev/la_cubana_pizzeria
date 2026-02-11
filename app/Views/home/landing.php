@@ -436,48 +436,92 @@
         </div>
     </div>
 
-    <footer id="contact" class="bg-black border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-6 grid md:grid-cols-3 gap-10 text-white/70">
+    <footer id="contact" class="bg-black border-t border-white/10 pt-20 pb-10">
+        <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-12 text-white/70">
 
-            <!-- Logo / Marca -->
-            <div class="text-center md:text-left">
+            <!-- LOGO / DESCRIPCIÓN -->
+            <div class="text-center lg:text-left">
                 <img src="<?= base_url('images/logo.png'); ?>"
                     alt="La Cubana Pizzeria"
-                    class="h-20 mx-auto md:mx-0 mb-4">
-                <p class="text-sm">
-                    Auténtico sabor cubano en cada pizza 🍕
+                    class="h-24 mx-auto lg:mx-0 mb-6">
+                <p class="text-sm leading-relaxed mb-4">
+                    Auténtico sabor cubano en cada pizza.
+                    Tradición, calidad y pasión artesanal desde Georgia 🇨🇺🍕
                 </p>
+
+                <!-- REDES -->
+                <!-- <div class="flex justify-center lg:justify-start gap-4 mt-4">
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-800 hover:bg-red-600 transition">📘</a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-800 hover:bg-red-600 transition">📸</a>
+                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-800 hover:bg-red-600 transition">🐦</a>
+                </div> -->
             </div>
 
-            <!-- Contacto -->
+            <!-- CONTACTO (MEJORADO) -->
             <div class="text-center">
-                <h3 class="text-lg font-semibold text-white mb-4">Contacto</h3>
-                <p class="mb-2">
-                    📞 <a href="tel:12294560239" class="hover:text-red-500 transition">
-                        229-456-0239
+                <h3 class="text-lg font-semibold text-white mb-6">Contacto rápido</h3>
+
+                <div class="space-y-4">
+                    <a href="tel:12294560239"
+                        class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
+                        📞 <span class="font-semibold">229-456-0239</span>
                     </a>
-                </p>
-                <p>
-                    📞 <a href="tel:12294549662" class="hover:text-red-500 transition">
-                        229-454-9662
+
+                    <a href="tel:12294549662"
+                        class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
+                        📞 <span class="font-semibold">229-454-9662</span>
                     </a>
-                </p>
+
+                    <a href="https://wa.me/12294560239"
+                        target="_blank"
+                        class="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition">
+                         WhatsApp
+                    </a>
+                </div>
             </div>
 
-            <!-- Dirección -->
-            <div class="text-center md:text-right">
-                <h3 class="text-lg font-semibold text-white mb-4">Dirección</h3>
-                <p class="leading-relaxed">
-                    📍 1807 Garden Villa Dr<br>
-                    Moultrie, GA
-                </p>
+            <!-- HORARIOS -->
+            <div class="text-center">
+                <h3 class="text-lg font-semibold text-white mb-6">Horario</h3>
+
+                <ul class="space-y-3 text-sm">
+                    <li>🕒 Lun – Jue: <strong>11:00 AM – 9:00 PM</strong></li>
+                    <li>🕒 Vie – Sáb: <strong>11:00 AM – 11:00 PM</strong></li>
+                    <li>🕒 Domingo: <strong>12:00 PM – 8:00 PM</strong></li>
+                </ul>
+            </div>
+
+            <!-- MAPA -->
+            <div class="text-center lg:text-right">
+                <h3 class="text-lg font-semibold text-white mb-6">Ubicación</h3>
+
+                <div class="rounded-xl overflow-hidden border border-white/10 mb-4">
+                    <iframe
+                        src="https://www.google.com/maps?q=1807%20Garden%20Villa%20Dr,%20Moultrie,%20GA&output=embed"
+                        width="100%"
+                        height="220"
+                        style="border:0;"
+                        allowfullscreen
+                        loading="lazy">
+                    </iframe>
+                </div>
+
+                <a
+                    href="https://www.google.com/maps/dir/?api=1&destination=1807+Garden+Villa+Dr+Moultrie+GA"
+                    target="_blank"
+                    class="inline-block bg-red-600 hover:bg-red-700 text-white px-5 py-2 rounded-full text-sm font-semibold transition">
+                    📍 Cómo llegar
+                </a>
             </div>
 
         </div>
 
-        <!-- Línea inferior -->
-        <div class="mt-10 border-t border-white/10 pt-6 text-center text-sm text-white/50">
-            © <?= date('Y'); ?> Pizzería La Cubana · Todos los derechos reservados
+        <!-- DIVISOR -->
+        <div class="mt-16 border-t border-white/10"></div>
+
+        <!-- PIE FINAL -->
+        <div class="mt-6 text-center text-sm text-white/50">
+            © <?= date('Y'); ?> Pizzería La Cubana · Hecho con ❤️ en Georgia
         </div>
     </footer>
 
