@@ -7,7 +7,7 @@ use CodeIgniter\Router\RouteCollection;
  */
 $routes->get('/', 'Home::landing');
 
-$routes->get('/admin', 'Home::admin');
+$routes->get('/adminLogin', 'Home::adminLogin');
 $routes->post('/adminLoginProccess', 'AuthController::adminLoginProccess');
 
 $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
@@ -15,4 +15,8 @@ $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
     $routes->post('addPizza', 'AdminController::addPizza');
     $routes->post('updatePizza', 'AdminController::updatePizza');
     $routes->post('deletePizza', 'AdminController::deletePizza');
+
+    $routes->get('admins', 'AdminController::admins');
+    $routes->get('orders', 'AdminController::orders');
+    $routes->post('logout', 'AdminController::logout');
 });

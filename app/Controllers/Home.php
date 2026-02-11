@@ -31,10 +31,8 @@ class Home extends BaseController
         return view('home/landing', $data);
     }
 
-    public function admin()
+    public function adminLogin()
     {
-        $data['page'] = view('admin/auth/login');
-
-        return view('admin/mainAdmin', $data);
+        return view('admin/auth/login');
     }
 }

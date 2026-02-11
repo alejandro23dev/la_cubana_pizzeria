@@ -69,4 +69,16 @@ class MainModel extends Model
 
 		return $result;
 	}
+
+	public function getOrders()
+	{
+		return  $this->db->table('orders')
+			->get()->getResult();
+	}
+
+	public function getAdmins()
+	{
+		return  $this->db->table('admin')
+			->get()->getResult();
+	}
 }

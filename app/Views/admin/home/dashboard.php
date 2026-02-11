@@ -3,7 +3,7 @@
     <!-- HEADER -->
     <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
         <div>
-            <h1 class="text-3xl font-extrabold mb-2">Dashboard</h1>
+            <h1 class="text-3xl font-extrabold mb-2">Mis Pizzas</h1>
             <p class="text-white/60">Gestión de pizzas · La Cubana</p>
         </div>
 
@@ -105,7 +105,11 @@
             <h2 class="text-2xl font-bold mb-4">Nueva Pizza</h2>
 
             <form id="formAddPizza" enctype="multipart/form-data" class="space-y-4">
-                <input type="file" name="image" required class="bg-neutral-800 w-full px-3 py-2 rounded">
+                <input type="file"
+                    name="image"
+                    accept="image/*"
+                    required
+                    class="bg-neutral-800 w-full px-3 py-2 rounded">
                 <input type="text" name="name" placeholder="Nombre" required class="bg-neutral-800 w-full px-3 py-2 rounded">
                 <textarea name="description" placeholder="Descripción" required
                     class="bg-neutral-800 w-full px-3 py-2 rounded resize-none" style="height:80px"></textarea>

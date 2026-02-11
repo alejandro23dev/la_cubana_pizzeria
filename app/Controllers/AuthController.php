@@ -38,8 +38,11 @@ class AuthController extends BaseController
         $session = [
             'admin_id'   => $admin['data']->id,
             'admin_user' => $admin['data']->user,
+            'admin_email' => $admin['data']->email,
             'is_admin'   => true
         ];
+
+        $this->objAuthModel->updateLastSession($admin['data']->id);
 
         $this->objSession->set($session);
 

@@ -20,10 +20,13 @@ class AdminController extends BaseController
         $this->objMainModel = new MainModel;
     }
 
+    ## DASHBOARD
+
     public function dashboard()
     {
         $data = [];
         $data['pizzas'] = $this->objMainModel->getPizzas();
+        $data['dashboard_active'] = true;
         $data['page'] = view('admin/home/dashboard', $data);
 
         return view('admin/mainAdmin', $data);
@@ -135,5 +138,35 @@ class AdminController extends BaseController
         return $this->response->setJSON([
             'error' => 0
         ]);
+    }
+
+        ## ORDERS
+
+    public function orders()
+    {
+        $data = [];
+        $data['orders'] = $this->objMainModel->getOrders();
+        $data['orders_active'] = true;
+        $data['page'] = view('admin/home/orders', $data);
+
+        return view('admin/mainAdmin', $data);
+    }
+
+    ## ADMINS
+
+    public function admins()
+    {
+        $data = [];
+        $data['admins'] = $this->objMainModel->getAdmins();
+        $data['admins_active'] = true;
+        $data['page'] = view('admin/home/admins', $data);
+
+        return view('admin/mainAdmin', $data);
+    }
+
+    public function logout()
+    {
+        $this->objSession->destroy();
+        return $this->response->setJSON(['ok' => true]);
     }
 }

@@ -31,4 +31,11 @@ class AuthModel extends Model
 
 		return ['error' => 0, 'msg' => 'Login exitoso', 'data' => $admin];
 	}
+
+	public function updateLastSession(int $adminId)
+	{
+		$this->db->table('admin')
+			->where('id', $adminId)
+			->update(['last_session' => date('Y-m-d H:i:s')]);
+	}
 }
