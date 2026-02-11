@@ -20,7 +20,7 @@ class Home extends BaseController
         $this->objMainModel = new MainModel;
     }
 
-    public function index()
+    public function landing()
     {
         $pizzas = $this->objMainModel->getPizzas();
 
@@ -29,5 +29,12 @@ class Home extends BaseController
         ];
 
         return view('home/landing', $data);
+    }
+
+    public function admin()
+    {
+        $data['page'] = view('admin/auth/login');
+
+        return view('admin/mainAdmin', $data);
     }
 }

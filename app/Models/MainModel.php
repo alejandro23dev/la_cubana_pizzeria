@@ -49,4 +49,24 @@ class MainModel extends Model
 		return  $this->db->table('pizzas')
 			->get()->getResult();
 	}
+
+	public function updatePizza($id, $data)
+	{
+		return $this->objUpdate('pizzas', $data, $id);
+	}
+
+	public function deletePizza($id)
+	{
+		$query = $this->db->table('pizzas')->where('id', $id)->delete();
+
+		$result = array();
+		if ($query == true) {
+			$result['error'] = 0;
+			$result['id'] = $id;
+		} else {
+			$result['error'] = 1;
+		}
+
+		return $result;
+	}
 }
