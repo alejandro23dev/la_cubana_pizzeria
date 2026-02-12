@@ -91,9 +91,6 @@
         "post-update-cmd": [
             "CodeIgniter\\ComposerScripts::postUpdate"
         ],
-        "post-autoload-dump": [
-                "CodeIgniter\\Commands\\..."
-        ],
         "analyze": [
             "Composer\\Config::disableProcessTimeout",
             "@phpstan:check",
