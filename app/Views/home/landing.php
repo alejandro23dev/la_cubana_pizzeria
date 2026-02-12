@@ -16,6 +16,9 @@
     <!-- jQuery -->
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
 
+    <!-- SWEET toast 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <!-- Animaciones base -->
     <style>
         @keyframes fadeUp {
@@ -411,7 +414,7 @@
         </div>
 
         <button id="openCheckout"
-            class="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold">
+            class="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold cursor-pointer">
             Confirmar pedido
         </button>
     </div>
@@ -430,7 +433,7 @@
                 class="w-full bg-neutral-800 px-3 py-2 rounded mb-4">
 
             <button id="confirmOrder"
-                class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold">
+                class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold cursor-pointer">
                 Confirmar orden
             </button>
         </div>
@@ -446,7 +449,7 @@
                     class="h-24 mx-auto lg:mx-0 mb-6">
                 <p class="text-sm leading-relaxed mb-4">
                     Auténtico sabor cubano en cada pizza.
-                    Tradición, calidad y pasión artesanal desde Georgia 🇨🇺🍕
+                    Tradición, calidad y pasión artesanal desde Georgia 🍕
                 </p>
 
                 <!-- REDES -->
@@ -475,7 +478,7 @@
                     <a href="https://wa.me/12294560239"
                         target="_blank"
                         class="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition">
-                         WhatsApp
+                        WhatsApp
                     </a>
                 </div>
             </div>
@@ -577,6 +580,16 @@
                 }
             });
         });
+
+        function toast(icon, message) {
+            Swal.fire({
+                icon: icon, // success | error | warning | info
+                title: message,
+                showConfirmButton: false,
+                timer: 2500,
+                timerProgressBar: true
+            });
+        }
     </script>
 
     <!-- SCRIPT CARRITO -->
@@ -609,7 +622,7 @@
                 let qty = parseInt(qtyRaw, 10);
 
                 if (isNaN(qty) || qty < 1) {
-                    alert('La cantidad mínima es 1');
+                    toast('error', 'La cantidad mínima es 1');
                     $('#qtyInput').val(1).focus();
                     return;
                 }
@@ -663,26 +676,38 @@
             $('#confirmOrder').click(() => {
                 let name = $('#clientName').val().trim();
                 let phone = $('#clientPhone').val().trim();
+                let totalPrice = 0;
 
                 let nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,}$/;
                 let phoneRegex = /^\+?[0-9]{7,15}$/;
 
+                if (name === '' || phone === '') {
+                    toast('error', 'Debes ingresar tu nombre y teléfono');
+                    return;
+                }
+
                 if (!nameRegex.test(name)) {
-                    alert('El nombre solo puede contener letras');
+                    toast('error', 'El nombre solo puede contener letras');
                     $('#clientName').focus();
                     return;
                 }
 
                 if (!phoneRegex.test(phone)) {
-                    alert('Teléfono inválido');
+                    toast('error', 'Teléfono inválido');
                     $('#clientPhone').focus();
                     return;
                 }
 
                 if (cart.length === 0 || name === '' || phone === '') {
-                    alert('Debes añadir productos, nombre y teléfono');
+                    toast('error', 'Debes añadir productos, nombre y teléfono');
                     return;
                 }
+
+                cart.forEach(p => {
+                    totalPrice += p.price * p.quantity;
+                });
+
+                totalPrice = parseFloat(totalPrice.toFixed(2));
 
                 let products = cart.map(p => ({
                     id: p.id,
@@ -696,17 +721,18 @@
                     data: {
                         client_name: name,
                         client_phone: phone,
-                        products: JSON.stringify(products)
+                        products: JSON.stringify(products),
+                        total_price: totalPrice
                     },
                     success: res => {
                         if (res.error === 0) {
-                            alert('Orden enviada correctamente');
+                            toast('success', 'Orden enviada correctamente');
                             cart = [];
                             saveCart();
                             renderCart();
                             $('#modalCheckout').addClass('hidden');
                         } else {
-                            alert('Error al procesar la orden');
+                            toast('error', 'Error al procesar la orden');
                         }
                     }
                 });

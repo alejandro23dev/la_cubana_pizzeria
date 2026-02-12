@@ -121,8 +121,13 @@ class MainModel extends Model
 			// Construir texto legible
 			foreach ($products as $p) {
 				if (isset($map[$p['id']])) {
+					// Producto existe
 					$order->products_readable[] =
 						$p['quantity'] . ' - ' . $map[$p['id']];
+				} else {
+					// Producto eliminado
+					$order->products_readable[] =
+						$p['quantity'] . ' - Este producto ya no existe';
 				}
 			}
 		}

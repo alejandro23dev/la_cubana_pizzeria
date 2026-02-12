@@ -53,6 +53,16 @@
 
                     </div>
 
+                    <!-- TOTAL -->
+                    <div class="mb-4 flex justify-between items-center bg-neutral-800/60 rounded-lg px-4 py-2">
+                        <span class="text-sm text-white/60">
+                            Total a pagar
+                        </span>
+                        <span class="text-lg font-bold text-green-500">
+                            $<?= number_format((float)$o->total_price, 2); ?>
+                        </span>
+                    </div>
+
                     <!-- ESTADO -->
                     <div>
                         <label class="text-xs text-white/60 mb-1 block">
@@ -107,7 +117,7 @@
         <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm text-center relative">
 
             <button id="closePhoneModal"
-                class="absolute top-3 right-3 text-white/60 hover:text-white text-xl">
+                class="absolute top-3 right-3 text-white/60 hover:text-white text-xl cursor-pointer">
                 ✕
             </button>
 
@@ -124,18 +134,18 @@
                 <a id="btnCall"
                     href="#"
                     class="bg-blue-600 hover:bg-blue-700 py-2 rounded font-semibold transition">
-                    📞 Llamar
+                    Llamar
                 </a>
 
                 <a id="btnWhatsapp"
                     href="#"
                     target="_blank"
                     class="bg-green-600 hover:bg-green-700 py-2 rounded font-semibold transition">
-                    💬 Escribir por WhatsApp
+                    Escribir por WhatsApp
                 </a>
 
                 <button id="cancelPhoneModal"
-                    class="bg-neutral-700 hover:bg-neutral-600 py-2 rounded transition">
+                    class="bg-neutral-700 hover:bg-neutral-600 py-2 rounded transition cursor-pointer">
                     Cancelar
                 </button>
             </div>
@@ -198,9 +208,7 @@
                 },
                 success: function(res) {
                     if (res.error === 0) {
-                        // actualizar estado guardado
                         select.data('original', newStatus);
-                        alert('Estado actualizado correctamente');
                     } else {
                         alert('Error al actualizar el estado');
                         select.val(oldStatus);
