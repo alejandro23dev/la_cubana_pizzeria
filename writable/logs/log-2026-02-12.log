@@ -27,3 +27,52 @@ DEBUG - 2026-02-12 18:52:26 --> Session: Class initialized using 'CodeIgniter\Se
 DEBUG - 2026-02-12 18:52:26 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-02-12 18:52:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
 DEBUG - 2026-02-12 18:52:31 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+ERROR - 2026-02-12 23:27:51 --> Error connecting to the database: mysqli_sql_exception: Access denied for user 'u330308956_Admin'@'localhost' (using password: YES) in C:\wamp64\www\la_cubana_pizzeria\system\Database\MySQLi\Connection.php:201
+Stack trace:
+#0 C:\wamp64\www\la_cubana_pizzeria\system\Database\MySQLi\Connection.php(201): mysqli->real_connect('localhost', 'u330308956_Admi...', Object(SensitiveParameterValue), 'u330308956_lacu...', 3306, '', 0)
+#1 C:\wamp64\www\la_cubana_pizzeria\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#2 C:\wamp64\www\la_cubana_pizzeria\system\Database\BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#3 C:\wamp64\www\la_cubana_pizzeria\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#4 C:\wamp64\www\la_cubana_pizzeria\app\Models\MainModel.php(55): CodeIgniter\Database\BaseBuilder->get()
+#5 C:\wamp64\www\la_cubana_pizzeria\app\Controllers\Home.php(25): App\Models\MainModel->getPizzas()
+#6 C:\wamp64\www\la_cubana_pizzeria\system\CodeIgniter.php(951): App\Controllers\Home->landing()
+#7 C:\wamp64\www\la_cubana_pizzeria\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#8 C:\wamp64\www\la_cubana_pizzeria\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#9 C:\wamp64\www\la_cubana_pizzeria\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#10 C:\wamp64\www\la_cubana_pizzeria\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#11 C:\wamp64\www\la_cubana_pizzeria\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#12 {main}
+
+Next CodeIgniter\Database\Exceptions\DatabaseException: Access denied for user '****'@'localhost' (using password: YES) in C:\wamp64\www\la_cubana_pizzeria\system\Database\MySQLi\Connection.php:231
+Stack trace:
+#0 C:\wamp64\www\la_cubana_pizzeria\system\Database\BaseConnection.php(419): CodeIgniter\Database\MySQLi\Connection->connect(false)
+#1 C:\wamp64\www\la_cubana_pizzeria\system\Database\BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+#2 C:\wamp64\www\la_cubana_pizzeria\system\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *\nFROM `...', Array, false)
+#3 C:\wamp64\www\la_cubana_pizzeria\app\Models\MainModel.php(55): CodeIgniter\Database\BaseBuilder->get()
+#4 C:\wamp64\www\la_cubana_pizzeria\app\Controllers\Home.php(25): App\Models\MainModel->getPizzas()
+#5 C:\wamp64\www\la_cubana_pizzeria\system\CodeIgniter.php(951): App\Controllers\Home->landing()
+#6 C:\wamp64\www\la_cubana_pizzeria\system\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+#7 C:\wamp64\www\la_cubana_pizzeria\system\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(NULL, Object(Config\Cache), false)
+#8 C:\wamp64\www\la_cubana_pizzeria\system\Boot.php(417): CodeIgniter\CodeIgniter->run()
+#9 C:\wamp64\www\la_cubana_pizzeria\system\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+#10 C:\wamp64\www\la_cubana_pizzeria\public\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+#11 {main}
+CRITICAL - 2026-02-12 23:27:51 --> CodeIgniter\Database\Exceptions\DatabaseException: Unable to connect to the database.
+Main connection [MySQLi]: Access denied for user '****'@'localhost' (using password: YES)
+[Method: GET, Route: /]
+in SYSTEMPATH\Database\BaseConnection.php on line 465.
+ 1 SYSTEMPATH\Database\BaseConnection.php(654): CodeIgniter\Database\BaseConnection->initialize()
+ 2 SYSTEMPATH\Database\BaseBuilder.php(1649): CodeIgniter\Database\BaseConnection->query('SELECT *
+FROM `pizzas`', [], false)
+ 3 APPPATH\Models\MainModel.php(55): CodeIgniter\Database\BaseBuilder->get()
+ 4 APPPATH\Controllers\Home.php(25): App\Models\MainModel->getPizzas()
+ 5 SYSTEMPATH\CodeIgniter.php(951): App\Controllers\Home->landing()
+ 6 SYSTEMPATH\CodeIgniter.php(497): CodeIgniter\CodeIgniter->runController(Object(App\Controllers\Home))
+ 7 SYSTEMPATH\CodeIgniter.php(340): CodeIgniter\CodeIgniter->handleRequest(null, Object(Config\Cache), false)
+ 8 SYSTEMPATH\Boot.php(417): CodeIgniter\CodeIgniter->run()
+ 9 SYSTEMPATH\Boot.php(68): CodeIgniter\Boot::runCodeIgniter(Object(CodeIgniter\CodeIgniter))
+10 FCPATH\index.php(59): CodeIgniter\Boot::bootWeb(Object(Config\Paths))
+DEBUG - 2026-02-12 23:28:20 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-12 23:28:25 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-12 23:37:44 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.
+DEBUG - 2026-02-12 23:37:46 --> Session: Class initialized using 'CodeIgniter\Session\Handlers\FileHandler' driver.

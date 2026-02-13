@@ -200,7 +200,7 @@
                 <div class="animate-fade-up">
                     <h2 class="text-4xl md:text-5xl font-extrabold mb-8 leading-tight">
                         Auténtica Pizza Cubana<br>
-                        <span class="text-red-500">en el corazón de Georgia</span>
+                        <span class="text-red-500">en el corazón de Moultrie</span>
                     </h2>
 
                     <p class="text-white/80 leading-relaxed mb-6 text-lg">
@@ -230,7 +230,7 @@
                         </div>
                         <div class="flex items-center gap-3">
                             <span class="text-red-500 text-xl">📍</span>
-                            <span class="text-white/80">Ubicados en Georgia, USA</span>
+                            <span class="text-white/80">Ubicados en Moultrie, Georgia, USA</span>
                         </div>
                     </div>
                 </div>
@@ -392,11 +392,8 @@
                             class="px-8 py-3 bg-red-600 hover:bg-red-700 rounded-full font-semibold transition">
                             Contáctanos
                         </a>
-
                     </div>
-
                 <?php } ?>
-
             </div>
         </section>
     </main>
@@ -449,7 +446,7 @@
                     class="h-24 mx-auto lg:mx-0 mb-6">
                 <p class="text-sm leading-relaxed mb-4">
                     Auténtico sabor cubano en cada pizza.
-                    Tradición, calidad y pasión artesanal desde Georgia 🍕
+                    Tradición, calidad y pasión artesanal desde Moultrie 🍕
                 </p>
 
                 <!-- REDES -->
@@ -524,7 +521,7 @@
 
         <!-- PIE FINAL -->
         <div class="mt-6 text-center text-sm text-white/50">
-            © <?= date('Y'); ?> Pizzería La Cubana · Hecho con ❤️ en Georgia
+            © <?= date('Y'); ?> Pizzería La Cubana · Hecho por <a href="http://">Alejandro Vázquez</a>
         </div>
     </footer>
 
