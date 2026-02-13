@@ -6,16 +6,9 @@ class SEO extends BaseController
 {
     public function sitemap()
     {
-        $this->response->setHeader('Content-Type', 'text/xml');
+        $urls[0] = ['loc' => base_url('/'), 'lastmod' => date('Y-m-d'), 'changefreq' => 'weekly', 'priority' => '0.8'];
+        $xml = view('sitemap', ['urls' => $urls]);
 
-        $xml = '<?xml version="1.0" encoding="UTF-8"?>';
-        $xml .= '<urlset xmlns="https://www.sitemaps.org/schemas/sitemap/0.9">';
-        $xml .= '<url>';
-        $xml .= '<loc>' . base_url() . '</loc>';
-        $xml .= '<priority>1.0</priority>';
-        $xml .= '</url>';
-        $xml .= '</urlset>';
-
-        return $this->response->setBody($xml);
+        return $this->response->setHeader('Content-Type', 'application/xml')->setBody($xml);
     }
 }
