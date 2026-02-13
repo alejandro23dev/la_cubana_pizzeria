@@ -31,6 +31,15 @@
     <meta name="twitter:card" content="summary_large_image">
 
     <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
+
+    <!-- Tailwind CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+
+    <!-- SWEET toast 2 -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </head>
 
 <body class="bg-neutral-950 text-white overflow-x-hidden">
