@@ -3,126 +3,34 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Pizzería La Cubana</title>
-    <meta name="description" content="Pizzería La Cubana: auténtico sabor cubano con pizzas artesanales.">
+
+    <title>Pizzería La Cubana | Pizza Cubana en Moultrie, Georgia</title>
+
+    <meta name="description"
+        content="La mejor pizza cubana en Moultrie, Georgia. Pizzería La Cubana ofrece pizzas artesanales con auténtico sabor cubano. Ordena hoy mismo.">
+
+    <meta name="keywords"
+        content="pizza cubana, pizzas cubanas, pizzería cubana, pizza cubana en Georgia, pizza cubana en Moultrie, comida cubana en Georgia">
+
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <!-- Favicon -->
+    <meta name="author" content="Pizzería La Cubana">
+
+    <meta name="robots" content="index, follow">
+
+    <link rel="canonical" href="<?= base_url(); ?>">
+
+    <!-- Open Graph -->
+    <meta property="og:title" content="Pizzería La Cubana | Pizza Cubana en Georgia">
+    <meta property="og:description" content="Auténtica pizza cubana artesanal en Moultrie, Georgia.">
+    <meta property="og:image" content="<?= base_url('public/images/logo.png'); ?>">
+    <meta property="og:url" content="<?= base_url(); ?>">
+    <meta property="og:type" content="website">
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image">
+
     <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
-
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
-
-    <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
-
-    <!-- SWEET toast 2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-
-    <!-- Animaciones base -->
-    <style>
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        .animate-fade-up {
-            animation: fadeUp 1s ease-out forwards;
-        }
-
-        @keyframes fireGlow {
-            0% {
-                box-shadow: 0 0 10px rgba(255, 180, 0, .4);
-            }
-
-            50% {
-                box-shadow: 0 0 25px rgba(255, 140, 0, .9);
-            }
-
-            100% {
-                box-shadow: 0 0 10px rgba(255, 180, 0, .4);
-            }
-        }
-
-        .fire-border {
-            border: 3px solid #facc15;
-            /* amarillo oro */
-            animation: fireGlow 2s infinite ease-in-out;
-        }
-
-        /* Separador base */
-        .separator-fire {
-            width: 220px;
-            height: 4px;
-            border-radius: 999px;
-            background: linear-gradient(90deg,
-                    #ef4444,
-                    #facc15,
-                    #ef4444);
-            background-size: 300% 100%;
-            animation: fireMove 3s ease-in-out infinite;
-            box-shadow:
-                0 0 10px rgba(239, 68, 68, 0.6),
-                0 0 20px rgba(250, 204, 21, 0.6);
-        }
-
-        /* Animación */
-        @keyframes fireMove {
-            0% {
-                background-position: 0% 50%;
-                box-shadow:
-                    0 0 8px rgba(239, 68, 68, 0.5),
-                    0 0 16px rgba(250, 204, 21, 0.4);
-            }
-
-            50% {
-                background-position: 100% 50%;
-                box-shadow:
-                    0 0 16px rgba(239, 68, 68, 0.9),
-                    0 0 30px rgba(250, 204, 21, 0.9);
-            }
-
-            100% {
-                background-position: 0% 50%;
-                box-shadow:
-                    0 0 8px rgba(239, 68, 68, 0.5),
-                    0 0 16px rgba(250, 204, 21, 0.4);
-            }
-        }
-
-        .no-scrollbar::-webkit-scrollbar {
-            display: none;
-        }
-
-        .no-scrollbar {
-            -ms-overflow-style: none;
-            scrollbar-width: none;
-        }
-
-        .category-tab {
-            background: #1f1f1f;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            color: rgba(255, 255, 255, 0.7);
-        }
-
-        .category-tab:hover {
-            background: #262626;
-            color: white;
-        }
-
-        .active-tab {
-            background: #dc2626;
-            color: white;
-            border-color: #dc2626;
-        }
-    </style>
 </head>
 
 <body class="bg-neutral-950 text-white overflow-x-hidden">

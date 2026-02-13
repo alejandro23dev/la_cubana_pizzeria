@@ -10,6 +10,7 @@ $routes->get('/', 'Home::landing');
 $routes->get('/adminLogin', 'Home::adminLogin');
 $routes->post('/adminLoginProccess', 'AuthController::adminLoginProccess');
 $routes->post('/makeOrder', 'Home::makeOrder');
+$routes->get('sitemap.xml', 'SEO::sitemap');
 
 $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
     $routes->get('dashboard', 'AdminController::dashboard');
