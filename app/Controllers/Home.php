@@ -22,10 +22,12 @@ class Home extends BaseController
 
     public function landing()
     {
-        $pizzas = $this->objMainModel->getPizzas();
+        $products = $this->objMainModel->getProducts();
+        $categories = $this->objMainModel->getCategories();
 
         $data = [
-            'pizzas' => $pizzas
+            'products' => $products,
+            'categories' => $categories
         ];
 
         return view('home/landing', $data);

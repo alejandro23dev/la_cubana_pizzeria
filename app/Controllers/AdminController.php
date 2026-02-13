@@ -25,14 +25,15 @@ class AdminController extends BaseController
     public function dashboard()
     {
         $data = [];
-        $data['pizzas'] = $this->objMainModel->getPizzas();
+        $data['products'] = $this->objMainModel->getProducts();
+        $data['categories'] = $this->objMainModel->getCategories();
         $data['dashboard_active'] = true;
         $data['page'] = view('admin/home/dashboard', $data);
 
         return view('admin/mainAdmin', $data);
     }
 
-    public function updatePizza()
+    public function updateProduct()
     {
         $id = $this->objRequest->getPost('id');
         $name = $this->objRequest->getPost('name');
@@ -53,7 +54,7 @@ class AdminController extends BaseController
         return $this->response->setJSON($result);
     }
 
-    public function deletePizza()
+    public function deleteProduct()
     {
         $id     = $this->objRequest->getPost('id');
         $imgURL = $this->objRequest->getPost('imgURL');
@@ -76,7 +77,7 @@ class AdminController extends BaseController
         return $this->response->setJSON($result);
     }
 
-    public function addPizza()
+    public function addProduct()
     {
         $file = $this->request->getFile('image');
 
@@ -108,9 +109,10 @@ class AdminController extends BaseController
         $description = trim($this->request->getPost('description'));
         $price       = $this->request->getPost('price');
         $new_price   = $this->request->getPost('new_price') ?: 0;
+        $category_id = $this->request->getPost('category_id');
 
         // Validaciones básicas
-        if ($name === '' || $description === '' || !is_numeric($price)) {
+        if ($name === '' || $description === '' || !is_numeric($price) || empty($category_id)) {
             return $this->response->setJSON([
                 'error' => 1,
                 'msg'   => 'Datos inválidos'
@@ -126,13 +128,34 @@ class AdminController extends BaseController
         $file->move(FCPATH . 'images/pizzas', $fileName);
 
         // Guardar en BD (solo nombre.extensión)
-        $this->objMainModel->objCreate('pizzas', [
+        $this->objMainModel->objCreate('products', [
             'img'        => $fileName,
             'name'       => $name,
             'description' => $description,
             'price'      => number_format((float)$price, 2, '.', ''),
             'new_price'  => number_format((float)$new_price, 2, '.', ''),
-            'popular'    => 0
+            'popular'    => 0,
+            'category_id'   => $category_id
+        ]);
+
+        return $this->response->setJSON([
+            'error' => 0
+        ]);
+    }
+
+    public function addCategory()
+    {
+        $name = trim($this->request->getPost('name'));
+
+        if ($name === '') {
+            return $this->response->setJSON([
+                'error' => 1,
+                'msg'   => 'Nombre de categoría es obligatorio'
+            ]);
+        }
+
+        $this->objMainModel->objCreate('categories', [
+            'name' => $name
         ]);
 
         return $this->response->setJSON([

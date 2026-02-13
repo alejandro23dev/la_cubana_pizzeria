@@ -13,9 +13,10 @@ $routes->post('/makeOrder', 'Home::makeOrder');
 
 $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
     $routes->get('dashboard', 'AdminController::dashboard');
-    $routes->post('addPizza', 'AdminController::addPizza');
-    $routes->post('updatePizza', 'AdminController::updatePizza');
-    $routes->post('deletePizza', 'AdminController::deletePizza');
+    $routes->post('addProduct', 'AdminController::addProduct');
+    $routes->post('updateProduct', 'AdminController::updateProduct');
+    $routes->post('deleteProduct', 'AdminController::deleteProduct');
+    $routes->post('addCategory', 'AdminController::addCategory');
 
     $routes->get('admins', 'AdminController::admins');
     $routes->post('addAdmin', 'AdminController::addAdmin');

@@ -49,20 +49,26 @@ class MainModel extends Model
 		return $result;
 	}
 
-	public function getPizzas()
+	public function getProducts()
 	{
-		return  $this->db->table('pizzas')
+		return  $this->db->table('products')
+			->get()->getResult();
+	}
+
+	public function getCategories()
+	{
+		return  $this->db->table('categories')
 			->get()->getResult();
 	}
 
 	public function updatePizza($id, $data)
 	{
-		return $this->objUpdate('pizzas', $data, $id);
+		return $this->objUpdate('products', $data, $id);
 	}
 
 	public function deletePizza($id)
 	{
-		$query = $this->db->table('pizzas')->where('id', $id)->delete();
+		$query = $this->db->table('products')->where('id', $id)->delete();
 
 		$result = array();
 		if ($query == true) {
@@ -106,7 +112,7 @@ class MainModel extends Model
 			}
 
 			// Consultar nombres de productos
-			$items = $this->db->table('pizzas')
+			$items = $this->db->table('products')
 				->select('id, name')
 				->whereIn('id', $ids)
 				->get()

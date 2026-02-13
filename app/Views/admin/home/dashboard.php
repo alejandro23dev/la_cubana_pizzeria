@@ -1,24 +1,78 @@
 <div class="max-w-7xl mx-auto px-6 py-10">
 
     <!-- HEADER -->
-    <div class="flex flex-col md:flex-row md:items-center md:justify-between mb-10">
+    <div class="flex flex-col gap-6 md:flex-row md:items-center md:justify-between mb-10">
+
+        <!-- TÍTULO -->
         <div>
-            <h1 class="text-3xl font-extrabold mb-2">Mis Pizzas</h1>
-            <p class="text-white/60">Gestión de pizzas · La Cubana</p>
+            <h1 class="text-3xl font-extrabold mb-2">Mis Productos</h1>
+            <p class="text-white/60">Gestión de productos · La Cubana</p>
         </div>
 
-        <!-- BOTÓN NUEVA PIZZA -->
-        <button id="btnOpenAddPizza"
-            class="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition cursor-pointer">
-            Nueva Pizza
-        </button>
+        <!-- BOTONES -->
+        <div class="flex flex-col sm:flex-row gap-3 sm:gap-4 sm:justify-end md:justify-end">
+
+            <!-- BOTÓN NUEVO PRODUCTO -->
+            <button id="btnOpenAddProduct"
+                <?= empty($categories) ? 'disabled' : '' ?>
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition
+            <?= empty($categories)
+                ? 'bg-gray-600 cursor-not-allowed opacity-60'
+                : 'bg-red-600 hover:bg-red-700 cursor-pointer' ?>">
+                Nuevo Producto
+            </button>
+
+            <!-- BOTÓN NUEVA CATEGORÍA -->
+            <button id="btnOpenAddCategory"
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition cursor-pointer">
+                Nueva Categoría
+            </button>
+
+        </div>
+
     </div>
 
+    <!-- =======================
+     CATEGORÍAS
+======================= -->
+    <div class="mb-10">
+
+        <h2 class="text-xl font-bold mb-4">Categorías</h2>
+
+        <?php if (!empty($categories)) { ?>
+
+            <div class="flex flex-wrap gap-3">
+
+                <?php foreach ($categories as $cat) { ?>
+                    <div class="bg-neutral-800 px-4 py-2 rounded-lg border border-white/10">
+                        <span class="font-semibold"><?= esc($cat->name) ?></span>
+                    </div>
+                <?php } ?>
+
+            </div>
+
+        <?php } else { ?>
+
+            <div class="bg-neutral-900 border border-yellow-500/40 p-4 rounded-lg">
+                <p class="text-yellow-400 font-semibold">
+                    ⚠ No hay categorías registradas
+                </p>
+                <p class="text-white/60 text-sm mt-1">
+                    Debes crear al menos una categoría para poder agregar productos.
+                </p>
+            </div>
+
+        <?php } ?>
+
+    </div>
+
+
     <!-- CONTENIDO -->
-    <?php if (!empty($pizzas)) { ?>
+    <h2 class="text-xl font-bold mb-4">Productos</h2>
+    <?php if (!empty($products)) { ?>
         <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-8">
 
-            <?php foreach ($pizzas as $p) {
+            <?php foreach ($products as $p) {
                 $isPopular = ($p->popular == '1');
                 $hasOffer  = ($p->new_price != '0');
             ?>
@@ -37,7 +91,7 @@
                     </div>
 
                     <!-- IMAGEN -->
-                    <img src="<?= base_url('images/pizzas/' . esc($p->img)); ?>"
+                    <img src="<?= base_url('public/images/pizzas/' . esc($p->img)); ?>"
                         class="h-40 w-full object-cover">
 
                     <!-- INFO -->
@@ -91,20 +145,20 @@
 
     <?php } else { ?>
         <div class="text-center py-24">
-            <p class="text-xl mb-4">🍕 No hay pizzas registradas</p>
+            <p class="text-xl mb-4">🍕 No hay productos registrados</p>
         </div>
     <?php } ?>
 
     <!-- MODAL -->
-    <div id="modalAddPizza"
+    <div id="modalAddProduct"
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
             <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
 
-            <h2 class="text-2xl font-bold mb-4">Nueva Pizza</h2>
+            <h2 class="text-2xl font-bold mb-4">Nuevo Producto</h2>
 
-            <form id="formAddPizza" enctype="multipart/form-data" class="space-y-4">
+            <form id="formAddProduct" enctype="multipart/form-data" class="space-y-4">
                 <input type="file"
                     name="image"
                     accept="image/*"
@@ -121,6 +175,19 @@
                         class="price-input bg-neutral-800 px-3 py-2 rounded">
                 </div>
 
+                <select name="category_id" required
+                    class="bg-neutral-800 w-full px-3 py-2 rounded text-white">
+
+                    <option value="" hidden>Seleccionar categoría</option>
+
+                    <?php foreach ($categories as $cat) { ?>
+                        <option value="<?= $cat->id ?>">
+                            <?= esc($cat->name) ?>
+                        </option>
+                    <?php } ?>
+
+                </select>
+
                 <button type="submit" id="btnAddPizza"
                     class="w-full bg-red-600 py-2 rounded font-semibold">
                     Guardar
@@ -128,6 +195,32 @@
             </form>
         </div>
     </div>
+
+    <!-- MODAL ADD CATEGORY -->
+    <div id="modalAddCategory"
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+
+        <div class="bg-neutral-900 max-w-md w-full p-6 rounded-xl relative">
+            <button id="closeModalCategory" class="absolute top-3 right-3 text-xl">✕</button>
+
+            <h2 class="text-2xl font-bold mb-4">Nueva Categoría</h2>
+
+            <form id="formAddCategory" class="space-y-4">
+                <input type="text"
+                    name="name"
+                    placeholder="Nombre de la categoría"
+                    required
+                    class="bg-neutral-800 w-full px-3 py-2 rounded text-white">
+
+                <button type="submit"
+                    id="btnAddCategory"
+                    class="w-full bg-blue-600 py-2 rounded font-semibold">
+                    Guardar Categoría
+                </button>
+            </form>
+        </div>
+    </div>
+
 </div>
 
 <script>
@@ -135,12 +228,12 @@
         /* =======================
            MODAL
         ======================= */
-        $('#btnOpenAddPizza').on('click', function() {
-            $('#modalAddPizza').removeClass('hidden').addClass('flex');
+        $('#btnOpenAddProduct').on('click', function() {
+            $('#modalAddProduct').removeClass('hidden').addClass('flex');
         });
 
         $('#closeModal').on('click', function() {
-            $('#modalAddPizza').addClass('hidden').removeClass('flex');
+            $('#modalAddProduct').addClass('hidden').removeClass('flex');
             $('#formAddPizza')[0].reset();
         });
 
@@ -156,16 +249,16 @@
         });
 
         /* =======================
-           ADD PIZZA
+           ADD PRODUCT
         ======================= */
-        $('#formAddPizza').on('submit', function(e) {
+        $('#formAddProduct').on('submit', function(e) {
             e.preventDefault();
 
-            let btn = $('#btnAddPizza');
+            let btn = $('#btnAddProduct');
             btn.prop('disabled', true).text('Guardando...');
 
             $.ajax({
-                url: "<?= base_url('admin/addPizza'); ?>",
+                url: "<?= base_url('admin/addProduct'); ?>",
                 type: "POST",
                 data: new FormData(this),
                 processData: false,
@@ -178,7 +271,7 @@
         });
 
         /* =======================
-           UPDATE PIZZA
+           UPDATE PRODUCT
         ======================= */
         $('.btn-update').on('click', function() {
             let id = $(this).data('id');
@@ -188,7 +281,7 @@
 
             $.ajax({
                 type: "POST",
-                url: "<?= base_url('admin/updatePizza'); ?>",
+                url: "<?= base_url('admin/updateProduct'); ?>",
                 data: {
                     id,
                     name: $('#txt-name-' + id).val(),
@@ -214,17 +307,17 @@
         });
 
         /* =======================
-           DELETE PIZZA
+           DELETE PRODUCT
         ======================= */
         $('.btn-delete').on('click', function() {
-            if (!confirm('¿Eliminar esta pizza?')) return;
+            if (!confirm('¿Eliminar este producto?')) return;
 
             let btn = $(this);
             let id = btn.data('id');
 
             $.ajax({
                 type: "POST",
-                url: "<?= base_url('admin/deletePizza'); ?>",
+                url: "<?= base_url('admin/deleteProduct'); ?>",
                 data: {
                     id,
                     imgURL: btn.data('img')
@@ -245,5 +338,46 @@
             });
         });
 
+        /* =======================
+   OPEN CATEGORY MODAL
+======================= */
+        $('#btnOpenAddCategory').on('click', function() {
+            $('#modalAddCategory').removeClass('hidden').addClass('flex');
+        });
+
+        $('#closeModalCategory').on('click', function() {
+            $('#modalAddCategory').addClass('hidden').removeClass('flex');
+            $('#formAddCategory')[0].reset();
+        });
+
+        /* =======================
+           ADD CATEGORY
+        ======================= */
+        $('#formAddCategory').on('submit', function(e) {
+            e.preventDefault();
+
+            let btn = $('#btnAddCategory');
+            btn.prop('disabled', true).text('Guardando...');
+
+            $.ajax({
+                url: "<?= base_url('admin/addCategory'); ?>",
+                type: "POST",
+                data: $(this).serialize(),
+                dataType: "json",
+                success: function(response) {
+                    if (response.error === 0) {
+                        location.reload();
+                    } else {
+                        alert(response.msg);
+                    }
+                },
+                error: function() {
+                    alert('Error del servidor');
+                },
+                complete: function() {
+                    btn.prop('disabled', false).text('Guardar Categoría');
+                }
+            });
+        });
     });
 </script>

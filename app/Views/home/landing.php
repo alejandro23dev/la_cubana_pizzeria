@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <!-- Favicon -->
-    <link rel="shortcut icon" type="image/png" href="<?= base_url('favicon.ico'); ?>">
+    <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
 
     <!-- Tailwind CDN -->
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
@@ -96,6 +96,32 @@
                     0 0 16px rgba(250, 204, 21, 0.4);
             }
         }
+
+        .no-scrollbar::-webkit-scrollbar {
+            display: none;
+        }
+
+        .no-scrollbar {
+            -ms-overflow-style: none;
+            scrollbar-width: none;
+        }
+
+        .category-tab {
+            background: #1f1f1f;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            color: rgba(255, 255, 255, 0.7);
+        }
+
+        .category-tab:hover {
+            background: #262626;
+            color: white;
+        }
+
+        .active-tab {
+            background: #dc2626;
+            color: white;
+            border-color: #dc2626;
+        }
     </style>
 </head>
 
@@ -105,7 +131,7 @@
 
             <!-- Logo -->
             <div class="flex items-center gap-3">
-                <img src="<?= base_url('images/logo.png'); ?>"
+                <img src="<?= base_url('public/images/logo.png'); ?>"
                     alt="La Cubana"
                     class="h-12 w-auto">
                 <span class="font-bold text-xl tracking-wide">LA CUBANA</span>
@@ -163,7 +189,7 @@
             <!-- CONTENIDO -->
             <div class="relative z-10 max-w-5xl text-center px-6">
 
-                <img src="<?= base_url('images/logo.png'); ?>"
+                <img src="<?= base_url('public/images/logo.png'); ?>"
                     class="mx-auto h-48 mb-8 animate-fade-up"
                     style="animation-delay: 0.2s">
 
@@ -288,10 +314,39 @@
                     <div class="separator-fire"></div>
                 </div>
 
-                <?php if (!empty($pizzas)) { ?>
+                <?php if (!empty($categories)) { ?>
+
+                    <!-- TABS CATEGORÍAS -->
+                    <div class="mb-14">
+
+                        <div class="flex overflow-x-auto no-scrollbar gap-4 pb-2"
+                            id="categoryTabs">
+
+                            <!-- TAB TODOS -->
+                            <button
+                                class="category-tab active-tab whitespace-nowrap px-6 py-2 rounded-full text-sm font-semibold transition"
+                                data-category="all">
+                                Todos
+                            </button>
+
+                            <?php foreach ($categories as $cat) { ?>
+                                <button
+                                    class="category-tab whitespace-nowrap px-6 py-2 rounded-full text-sm font-semibold transition"
+                                    data-category="<?= $cat->id ?>">
+                                    <?= esc($cat->name) ?>
+                                </button>
+                            <?php } ?>
+
+                        </div>
+                    </div>
+
+                <?php } ?>
+
+
+                <?php if (!empty($products)) { ?>
                     <div class="grid sm:grid-cols-2 lg:grid-cols-3 gap-10">
 
-                        <?php foreach ($pizzas as $p) {
+                        <?php foreach ($products as $p) {
 
                             // flags
                             $isPopular = ($p->popular == '1');
@@ -306,8 +361,7 @@
                             }
                         ?>
 
-                            <div class="<?= $cardClasses ?>">
-
+                            <div class="<?= $cardClasses ?> product-card" data-category="<?= $p->category_id ?>">
                                 <!-- BADGES -->
                                 <?php if ($isPopular) { ?>
                                     <span class="absolute top-4 left-4 bg-yellow-400 text-gray-700 text-xs font-bold px-3 py-1 rounded-full z-10">
@@ -322,7 +376,7 @@
                                 <?php } ?>
 
                                 <!-- IMAGEN -->
-                                <img src="<?= base_url('images/pizzas/' . esc($p->img)); ?>"
+                                <img src="<?= base_url('public/images/pizzas/' . esc($p->img)); ?>"
                                     alt="<?= esc($p->name); ?>"
                                     class="h-56 w-full object-cover">
 
@@ -394,6 +448,23 @@
                         </a>
                     </div>
                 <?php } ?>
+
+                <!-- MENSAJE SIN PRODUCTOS -->
+                <div id="noProductsMessage"
+                    class="hidden flex flex-col items-center justify-center text-center py-20">
+
+                    <div class="text-6xl mb-6">🍕</div>
+
+                    <h3 class="text-2xl font-bold mb-3">
+                        No hay productos en esta categoría
+                    </h3>
+
+                    <p class="text-white/60 max-w-md">
+                        Estamos preparando nuevas delicias para ti.
+                        Vuelve pronto o explora otras categorías.
+                    </p>
+                </div>
+
             </div>
         </section>
     </main>
@@ -441,7 +512,7 @@
 
             <!-- LOGO / DESCRIPCIÓN -->
             <div class="text-center lg:text-left">
-                <img src="<?= base_url('images/logo.png'); ?>"
+                <img src="<?= base_url('public/images/logo.png'); ?>"
                     alt="La Cubana Pizzeria"
                     class="h-24 mx-auto lg:mx-0 mb-6">
                 <p class="text-sm leading-relaxed mb-4">
@@ -764,7 +835,36 @@
                 }
             });
 
+            /* ---------- FILTRO POR CATEGORÍA ---------- */
+            $('.category-tab').on('click', function() {
 
+                $('.category-tab').removeClass('active-tab');
+                $(this).addClass('active-tab');
+
+                let selected = $(this).data('category');
+                let visibleCount = 0;
+
+                $('.product-card').each(function() {
+
+                    let productCategory = $(this).data('category');
+
+                    if (selected === 'all' || productCategory == selected) {
+                        $(this).fadeIn(200);
+                        visibleCount++;
+                    } else {
+                        $(this).hide();
+                    }
+                });
+
+                // Mostrar u ocultar mensaje vacío
+                if (visibleCount === 0) {
+                    $('#noProductsMessage').removeClass('hidden').fadeIn(200);
+                } else {
+                    $('#noProductsMessage').fadeOut(150, function() {
+                        $(this).addClass('hidden');
+                    });
+                }
+            });
         });
     </script>
 </body>
