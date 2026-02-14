@@ -258,15 +258,24 @@
             btn.prop('disabled', true).text('Guardando...');
 
             $.ajax({
-                url: "<?= base_url('admin/addProduct'); ?>",
                 type: "POST",
+                url: "<?= base_url('admin/addProduct'); ?>",
                 data: new FormData(this),
                 processData: false,
                 contentType: false,
                 dataType: "json",
-                success: r => r.error === 0 ? location.reload() : alert(r.msg),
-                error: () => alert('Error del servidor'),
-                complete: () => btn.prop('disabled', false).text('Guardar')
+                success: function(response) {
+                    if (response.error === 0) {
+                        location.reload();
+                    } else {
+                        alert(response.msg);
+                        btn.prop('disabled', false).text('Guardar')
+                    }
+                },
+                error: function() {
+                    alert('Error del servidor');
+                    btn.prop('disabled', false).text('Guardar')
+                }
             });
         });
 
@@ -326,11 +335,11 @@
                 },
                 dataType: "json",
                 success: function(response) {
-                    btn.text('Eliminar').prop('disabled', false);
                     if (response.error === 0) {
                         window.location.reload();
                     } else {
                         alert('Error al eliminar');
+                        btn.text('Eliminar').prop('disabled', false);
                     }
                 },
                 error: function() {
