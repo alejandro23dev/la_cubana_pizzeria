@@ -119,19 +119,19 @@
                         <div class="flex items-center gap-2">
                             <input type="checkbox" id="cbx-popular-<?= $p->id ?>"
                                 <?= $isPopular ? 'checked' : '' ?>
-                                class="accent-yellow-400">
+                                class="accent-yellow-400 cursor-pointer">
                             <label for="cbx-popular-<?= $p->id ?>" class="text-sm text-white/70">
                                 Pizza popular
                             </label>
                         </div>
 
                         <div class="flex gap-3 pt-3">
-                            <button class="btn-update flex-1 bg-blue-600 py-2 rounded font-semibold"
+                            <button class="btn-update flex-1 bg-blue-600 py-2 rounded font-semibold cursor-pointer"
                                 data-id="<?= $p->id ?>">
                                 Actualizar
                             </button>
 
-                            <button class="btn-delete flex-1 bg-red-700 py-2 rounded font-semibold"
+                            <button class="btn-delete flex-1 bg-red-700 py-2 rounded font-semibold cursor-pointer"
                                 data-id="<?= $p->id ?>"
                                 data-img="images/pizzas/<?= $p->img ?>">
                                 Eliminar
@@ -188,8 +188,8 @@
 
                 </select>
 
-                <button type="submit" id="btnAddPizza"
-                    class="w-full bg-red-600 py-2 rounded font-semibold">
+                <button type="submit" id="btnAddProduct"
+                    class="w-full bg-red-600 py-2 rounded font-semibold cursor-pointer">
                     Guardar
                 </button>
             </form>
@@ -214,7 +214,7 @@
 
                 <button type="submit"
                     id="btnAddCategory"
-                    class="w-full bg-blue-600 py-2 rounded font-semibold">
+                    class="w-full bg-blue-600 py-2 rounded font-semibold cursor-pointer">
                     Guardar Categoría
                 </button>
             </form>
@@ -315,6 +315,8 @@
             let btn = $(this);
             let id = btn.data('id');
 
+            btn.text('Eliminando').prop('disabled', true);
+
             $.ajax({
                 type: "POST",
                 url: "<?= base_url('admin/deleteProduct'); ?>",
@@ -324,15 +326,15 @@
                 },
                 dataType: "json",
                 success: function(response) {
+                    btn.text('Eliminar').prop('disabled', false);
                     if (response.error === 0) {
-                        $('#pizza-' + id).fadeOut(300, function() {
-                            $(this).remove();
-                        });
+                        window.location.reload();
                     } else {
                         alert('Error al eliminar');
                     }
                 },
                 error: function() {
+                    btn.text('Eliminar').prop('disabled', false);
                     alert('Error del servidor');
                 }
             });
