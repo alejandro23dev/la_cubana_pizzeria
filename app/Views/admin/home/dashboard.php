@@ -371,23 +371,22 @@
             btn.prop('disabled', true).text('Guardando...');
 
             $.ajax({
-                url: "<?= base_url('admin/addCategory'); ?>",
                 type: "POST",
+                url: "<?= base_url('admin/addCategory'); ?>",
                 data: $(this).serialize(),
                 dataType: "json",
                 success: function(response) {
                     if (response.error === 0) {
                         location.reload();
                     } else {
+                        btn.prop('disabled', false).text('Guardar Categoría');
                         alert(response.msg);
                     }
                 },
                 error: function() {
+                    btn.prop('disabled', false).text('Guardar Categoría');
                     alert('Error del servidor');
                 },
-                complete: function() {
-                    btn.prop('disabled', false).text('Guardar Categoría');
-                }
             });
         });
     });
