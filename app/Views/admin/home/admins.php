@@ -103,7 +103,7 @@
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
+            <button id="closeModal" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
 
             <h2 class="text-2xl font-bold mb-4">Nuevo Administrador</h2>
 
@@ -133,7 +133,6 @@
 
         $('#closeModal').on('click', function() {
             $('#modalAddAdmin').addClass('hidden').removeClass('flex');
-            $('#formAddAdmin')[0].reset();
         });
 
         $('#btnAddAdmin').on('click', function() {
@@ -142,7 +141,7 @@
             let password = $('#txt-password').val().trim();
 
             if (name === '' || email === '' || password === '') {
-                alert('Por favor, completa todos los campos.');
+                showToast('⚠️', 'Por favor, completa todos los campos.');
                 return;
             }
 
@@ -161,13 +160,48 @@
                             window.location.reload();
                             break;
                         case 1:
-                            alert(response.msg);
+                            showToast('⚠️', response.msg);
                             break;
                         default:
-                            alert('Error al agregar el administrador. Inténtalo de nuevo.');
+                            showToast('⚠️', 'Error al agregar el administrador. Inténtalo de nuevo.');
                     }
                 }
             });
         });
+
+        function showToast(icon, text, duration = 3000) {
+
+            $('#toastIcon').html(icon);
+            $('#toastText').text(text);
+
+            $('#appToast')
+                .removeClass('hidden')
+                .hide()
+                .fadeIn(200);
+
+            setTimeout(() => {
+                $('#appToast').fadeOut(300);
+            }, duration);
+        }
+
+        function showConfirm(text, onConfirm) {
+
+            $('#confirmText').text(text);
+
+            $('#appConfirm')
+                .removeClass('hidden')
+                .addClass('flex');
+
+            $('#confirmOk').off('click').on('click', function() {
+                $('#appConfirm').addClass('hidden').removeClass('flex');
+                if (typeof onConfirm === 'function') {
+                    onConfirm();
+                }
+            });
+
+            $('#confirmCancel').off('click').on('click', function() {
+                $('#appConfirm').addClass('hidden').removeClass('flex');
+            });
+        }
     });
 </script>

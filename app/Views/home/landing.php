@@ -41,6 +41,60 @@
     <!-- SWEET toast 2 -->
     <script src="<?= base_url('public/assets/sweetalert2/dist/sweetalert2.all.min.js'); ?>"></script>
     <link rel="stylesheet" href="<?= base_url('public/assets/sweetalert2/dist/sweetalert2.min.css'); ?>">
+
+    <style>
+        .separator-fire {
+            position: relative;
+            width: 320px;
+            height: 6px;
+            background: #1a1a1a;
+            /* Base horno */
+            border-radius: 9999px;
+            overflow: hidden;
+        }
+
+        /* Fuego principal */
+        .separator-fire::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    #7f1d1d,
+                    #dc2626,
+                    #f97316,
+                    #facc15,
+                    #f97316,
+                    #dc2626,
+                    #7f1d1d);
+            background-size: 200% 100%;
+            animation: fireMove 3s linear infinite;
+        }
+
+        /* Glow / calor */
+        .separator-fire::after {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background: linear-gradient(90deg,
+                    rgba(255, 0, 0, 0.6),
+                    rgba(255, 115, 0, 0.6),
+                    rgba(255, 200, 0, 0.6));
+            filter: blur(8px);
+            opacity: 0.8;
+        }
+
+        /* Animación fuego */
+        @keyframes fireMove {
+            0% {
+                background-position: 0% 50%;
+            }
+
+            100% {
+                background-position: 200% 50%;
+            }
+        }
+    </style>
+
 </head>
 
 <body class="bg-neutral-950 text-white overflow-x-hidden">
@@ -228,7 +282,7 @@
                     </p>
                 </div>
 
-                <div class="flex justify-center my-12">
+                <div class="flex justify-center mb-10">
                     <div class="separator-fire"></div>
                 </div>
 
@@ -241,23 +295,27 @@
                             id="categoryTabs">
 
                             <!-- TAB TODOS -->
-                            <button
-                                class="category-tab active-tab whitespace-nowrap px-6 py-2 rounded-full text-sm font-semibold transition"
-                                data-category="all">
-                                Todos
-                            </button>
+                            <?php if (!empty($products)) { ?>
+                                <div class="flex gap-3 overflow-x-auto pb-2">
 
-                            <?php foreach ($categories as $cat) { ?>
-                                <button
-                                    class="category-tab whitespace-nowrap px-6 py-2 rounded-full text-sm font-semibold transition"
-                                    data-category="<?= $cat->id ?>">
-                                    <?= esc($cat->name) ?>
-                                </button>
+                                    <!-- TODOS -->
+                                    <button class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-red-600 text-gray-600 border border-gray-300 transition-all duration-200"
+                                        data-category="all">
+                                        Todos
+                                    </button>
+
+                                    <?php foreach ($categories as $cat) { ?>
+                                        <button
+                                            class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-transparent text-gray-600 border border-gray-300 transition-all duration-200"
+                                            data-category="<?= $cat->id ?>">
+                                            <?= esc($cat->name) ?>
+                                        </button>
+                                    <?php } ?>
+
+                                </div>
                             <?php } ?>
-
                         </div>
                     </div>
-
                 <?php } ?>
 
 
@@ -474,8 +532,7 @@
                 <h3 class="text-lg font-semibold text-white mb-6">Horario</h3>
 
                 <ul class="space-y-3 text-sm">
-                    <li>🕒 Lun – Jue: <strong>11:00 AM – 9:00 PM</strong></li>
-                    <li>🕒 Vie – Sáb: <strong>11:00 AM – 11:00 PM</strong></li>
+                    <li>🕒 Lun – Sáb: <strong>10:00 AM – 9:00 PM</strong></li>
                     <li>🕒 Domingo: <strong>12:00 PM – 8:00 PM</strong></li>
                 </ul>
             </div>
@@ -756,8 +813,15 @@
             /* ---------- FILTRO POR CATEGORÍA ---------- */
             $('.category-tab').on('click', function() {
 
-                $('.category-tab').removeClass('active-tab');
-                $(this).addClass('active-tab');
+                // Quitar estilo activo a todos
+                $('.category-tab')
+                    .removeClass('bg-red-600 text-white')
+                    .addClass('bg-transparent text-gray-600');
+
+                // Agregar estilo activo al seleccionado
+                $(this)
+                    .removeClass('bg-transparent text-gray-600')
+                    .addClass('bg-red-600 text-white');
 
                 let selected = $(this).data('category');
                 let visibleCount = 0;
@@ -774,7 +838,6 @@
                     }
                 });
 
-                // Mostrar u ocultar mensaje vacío
                 if (visibleCount === 0) {
                     $('#noProductsMessage').removeClass('hidden').fadeIn(200);
                 } else {

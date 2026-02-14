@@ -268,12 +268,12 @@
                     if (response.error === 0) {
                         location.reload();
                     } else {
-                        alert(response.msg);
+                        showToast('⚠️', response.msg);
                         btn.prop('disabled', false).text('Guardar')
                     }
                 },
                 error: function() {
-                    alert('Error del servidor');
+                    showToast('⚠️', 'Error del servidor');
                     btn.prop('disabled', false).text('Guardar')
                 }
             });
@@ -319,33 +319,33 @@
            DELETE PRODUCT
         ======================= */
         $('.btn-delete').on('click', function() {
-            if (!confirm('¿Eliminar este producto?')) return;
-
             let btn = $(this);
             let id = btn.data('id');
 
-            btn.text('Eliminando').prop('disabled', true);
+            showConfirm('¿Eliminar este producto?', function() {
+                btn.text('Eliminando').prop('disabled', true);
 
-            $.ajax({
-                type: "POST",
-                url: "<?= base_url('admin/deleteProduct'); ?>",
-                data: {
-                    id,
-                    imgURL: btn.data('img')
-                },
-                dataType: "json",
-                success: function(response) {
-                    if (response.error === 0) {
-                        window.location.reload();
-                    } else {
-                        alert('Error al eliminar');
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('admin/deleteProduct'); ?>",
+                    data: {
+                        id,
+                        imgURL: btn.data('img')
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        if (response.error === 0) {
+                            window.location.reload();
+                        } else {
+                            showToast('⚠️', response.msg);
+                            btn.text('Eliminar').prop('disabled', false);
+                        }
+                    },
+                    error: function() {
                         btn.text('Eliminar').prop('disabled', false);
+                        showToast('⚠️', 'Error del servidor');
                     }
-                },
-                error: function() {
-                    btn.text('Eliminar').prop('disabled', false);
-                    alert('Error del servidor');
-                }
+                });
             });
         });
 
@@ -380,14 +380,49 @@
                         location.reload();
                     } else {
                         btn.prop('disabled', false).text('Guardar Categoría');
-                        alert(response.msg);
+                        showToast('⚠️', response.msg);
                     }
                 },
                 error: function() {
                     btn.prop('disabled', false).text('Guardar Categoría');
-                    alert('Error del servidor');
+                    showToast('⚠️', 'Error del servidor');
                 },
             });
         });
+
+        function showToast(icon, text, duration = 3000) {
+
+            $('#toastIcon').html(icon);
+            $('#toastText').text(text);
+
+            $('#appToast')
+                .removeClass('hidden')
+                .hide()
+                .fadeIn(200);
+
+            setTimeout(() => {
+                $('#appToast').fadeOut(300);
+            }, duration);
+        }
+
+        function showConfirm(text, onConfirm) {
+
+            $('#confirmText').text(text);
+
+            $('#appConfirm')
+                .removeClass('hidden')
+                .addClass('flex');
+
+            $('#confirmOk').off('click').on('click', function() {
+                $('#appConfirm').addClass('hidden').removeClass('flex');
+                if (typeof onConfirm === 'function') {
+                    onConfirm();
+                }
+            });
+
+            $('#confirmCancel').off('click').on('click', function() {
+                $('#appConfirm').addClass('hidden').removeClass('flex');
+            });
+        }
     });
 </script>

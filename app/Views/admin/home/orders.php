@@ -192,34 +192,71 @@
             let newStatus = select.val();
             let oldStatus = select.data('original');
 
-            if (!confirm('¿Estás seguro de cambiar el estado de esta orden?')) {
-                // volver al estado anterior
-                select.val(oldStatus);
-                return;
-            }
+            // if (!confirm('¿Estás seguro de cambiar el estado de esta orden?')) {
+            //    volver al estado anterior
+            //     select.val(oldStatus);
+            //     return;
+            // }
 
-            $.ajax({
-                url: "<?= base_url('admin/updateOrderStatus'); ?>",
-                type: "POST",
-                dataType: "json",
-                data: {
-                    order_id: orderId,
-                    status: newStatus
-                },
-                success: function(res) {
-                    if (res.error === 0) {
-                        select.data('original', newStatus);
-                    } else {
-                        alert('Error al actualizar el estado');
+            showConfirm('¿Estas seguro de cambiar el estado de esta orden?', select, oldStatus, function() {
+                $.ajax({
+                    url: "<?= base_url('admin/updateOrderStatus'); ?>",
+                    type: "POST",
+                    dataType: "json",
+                    data: {
+                        order_id: orderId,
+                        status: newStatus
+                    },
+                    success: function(res) {
+                        if (res.error === 0) {
+                            select.data('original', newStatus);
+                        } else {
+                            showToast('⚠️', 'Error al actualizar el estado');
+                            select.val(oldStatus);
+                        }
+                    },
+                    error: function() {
+                        showToast('⚠️', 'Error del servidor');
                         select.val(oldStatus);
                     }
-                },
-                error: function() {
-                    alert('Error de conexión');
-                    select.val(oldStatus);
+                });
+            });
+        });
+
+        function showToast(icon, text, duration = 3000) {
+
+            $('#toastIcon').html(icon);
+            $('#toastText').text(text);
+
+            $('#appToast')
+                .removeClass('hidden')
+                .hide()
+                .fadeIn(200);
+
+            setTimeout(() => {
+                $('#appToast').fadeOut(300);
+            }, duration);
+        }
+
+        function showConfirm(text, select, oldStatus, onConfirm) {
+
+            $('#confirmText').text(text);
+
+            $('#appConfirm')
+                .removeClass('hidden')
+                .addClass('flex');
+
+            $('#confirmOk').off('click').on('click', function() {
+                $('#appConfirm').addClass('hidden').removeClass('flex');
+                if (typeof onConfirm === 'function') {
+                    onConfirm();
                 }
             });
 
-        });
+            $('#confirmCancel').off('click').on('click', function() {
+                $('#appConfirm').addClass('hidden').removeClass('flex');
+                select.val(oldStatus);
+            });
+        }
     });
 </script>

@@ -61,7 +61,7 @@
                 <!-- USUARIO (desktop) -->
                 <div class="relative hidden md:block">
                     <button id="btnUserMenu"
-                        class="flex items-center gap-3 bg-neutral-900 px-4 py-2 rounded-lg hover:bg-neutral-800 transition">
+                        class="flex items-center gap-3 bg-neutral-900 px-4 py-2 rounded-lg hover:bg-neutral-800 transition cursor-pointer">
                         <div class="text-right leading-tight">
                             <p class="text-sm font-semibold">
                                 <?= esc(session()->get('admin_user')); ?>
@@ -77,7 +77,7 @@
                         class="absolute right-0 mt-2 w-44 bg-neutral-900 border border-white/10 rounded-lg shadow-lg hidden">
 
                         <button id="btnLogout"
-                            class="w-full text-left px-4 py-3 text-sm hover:bg-red-600 transition">
+                            class="w-full text-left px-4 py-3 text-sm hover:bg-red-600 transition cursor-pointer">
                             🚪 Cerrar sesión
                         </button>
                     </div>
@@ -134,6 +134,46 @@
 
         </div>
     </nav>
+
+    <!-- TOAST ALERT -->
+    <div id="appToast"
+        class="fixed top-6 right-6 z-50 hidden">
+
+        <div class="flex items-center gap-3 
+                bg-neutral-900 border border-white/10
+                px-5 py-4 rounded-xl shadow-2xl
+                min-w-[280px]">
+
+            <div id="toastIcon" class="text-2xl"></div>
+
+            <div id="toastText" class="text-sm font-semibold"></div>
+        </div>
+    </div>
+
+    <!-- CONFIRM MODAL -->
+    <div id="appConfirm"
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+
+        <div class="bg-neutral-900 w-full max-w-md p-6 rounded-xl">
+
+            <div class="flex items-start gap-3 mb-4">
+                <div class="text-yellow-400 text-2xl">⚠️</div>
+                <p id="confirmText" class="font-semibold"></p>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button id="confirmCancel"
+                    class="px-4 py-2 bg-neutral-700 rounded-lg cursor-pointer">
+                    Cancelar
+                </button>
+
+                <button id="confirmOk"
+                    class="px-4 py-2 bg-red-600 rounded-lg font-semibold cursor-pointer">
+                    Confirmar
+                </button>
+            </div>
+        </div>
+    </div>
 
     <?php echo $page; ?>
 
