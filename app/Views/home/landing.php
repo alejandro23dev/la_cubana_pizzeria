@@ -32,14 +32,15 @@
 
     <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="<?= base_url('public/assets/css/styles.css') ?>">
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="<?php echo base_url('public/assets/jquery/dist/jquery.min.js'); ?>"></script>
 
     <!-- SWEET toast 2 -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <script src="<?= base_url('public/assets/sweetalert2/dist/sweetalert2.all.min.js'); ?>"></script>
+    <link rel="stylesheet" href="<?= base_url('public/assets/sweetalert2/dist/sweetalert2.min.css'); ?>">
 </head>
 
 <body class="bg-neutral-950 text-white overflow-x-hidden">

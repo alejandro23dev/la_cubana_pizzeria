@@ -12,11 +12,11 @@
     <!-- Favicon -->
     <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
 
-    <!-- Tailwind CDN -->
-    <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
+    <!-- Tailwind -->
+    <link rel="stylesheet" href="<?= base_url('public/assets/css/styles.css') ?>">
 
     <!-- jQuery -->
-    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="<?php echo base_url('public/assets/jquery/dist/jquery.min.js'); ?>"></script>
 </head>
 
 <body class="bg-neutral-950 text-white overflow-x-hidden">
