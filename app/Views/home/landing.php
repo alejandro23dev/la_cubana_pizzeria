@@ -38,7 +38,15 @@
     <!-- jQuery -->
     <script src="<?php echo base_url('public/assets/jquery/dist/jquery.min.js'); ?>"></script>
 
+     <!-- Font Cabin -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Nova+Square&family=Playwrite+NZ+Basic:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
+        body {
+            font-family: "Cabin", sans-serif;
+        }
+
         .separator-fire {
             position: relative;
             width: 320px;
