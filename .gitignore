@@ -1,0 +1,33 @@
+# ======================
+# CODEIGNITER 4
+# ======================
+
+/writable/*
+!/writable/.htaccess
+
+# Sessions
+/writable/session/*
+/writable/sessions/*
+/writable/debugbar/*
+
+# Cache
+/writable/cache/*
+/writable/logs/*
+
+# ENV
+.env
+
+# Composer
+/vendor/
+
+# Node
+/node_modules/
+
+# ======================
+# IMÁGENES DINÁMICAS
+# ======================
+
+/public/images/pizzas/*
+
+# Opcional si subes más cosas
+/public/uploads/*
