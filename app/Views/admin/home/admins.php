@@ -25,7 +25,7 @@
                 $isMe = session()->get('admin_email') === $a->email;
             ?>
 
-                <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 hover:border-red-500 transition">
+                <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 hover:border-red-500 transition cursor-pointer">
 
                     <!-- AVATAR -->
                     <div class="flex items-center gap-4 mb-4">
@@ -100,7 +100,7 @@
 
     <!-- MODAL -->
     <div id="modalAddAdmin"
-        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
             <button id="closeModal" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
@@ -168,40 +168,7 @@
                 }
             });
         });
-
-        function showToast(icon, text, duration = 3000) {
-
-            $('#toastIcon').html(icon);
-            $('#toastText').text(text);
-
-            $('#appToast')
-                .removeClass('hidden')
-                .hide()
-                .fadeIn(200);
-
-            setTimeout(() => {
-                $('#appToast').fadeOut(300);
-            }, duration);
-        }
-
-        function showConfirm(text, onConfirm) {
-
-            $('#confirmText').text(text);
-
-            $('#appConfirm')
-                .removeClass('hidden')
-                .addClass('flex');
-
-            $('#confirmOk').off('click').on('click', function() {
-                $('#appConfirm').addClass('hidden').removeClass('flex');
-                if (typeof onConfirm === 'function') {
-                    onConfirm();
-                }
-            });
-
-            $('#confirmCancel').off('click').on('click', function() {
-                $('#appConfirm').addClass('hidden').removeClass('flex');
-            });
-        }
     });
 </script>
+
+<?php echo view('components/toast'); ?>

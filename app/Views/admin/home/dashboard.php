@@ -154,7 +154,7 @@
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
+            <button id="closeModal" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
 
             <h2 class="text-2xl font-bold mb-4">Nuevo Producto</h2>
 
@@ -201,7 +201,7 @@
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 max-w-md w-full p-6 rounded-xl relative">
-            <button id="closeModalCategory" class="absolute top-3 right-3 text-xl">✕</button>
+            <button id="closeModalCategory" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
 
             <h2 class="text-2xl font-bold mb-4">Nueva Categoría</h2>
 
@@ -389,40 +389,7 @@
                 },
             });
         });
-
-        function showToast(icon, text, duration = 3000) {
-
-            $('#toastIcon').html(icon);
-            $('#toastText').text(text);
-
-            $('#appToast')
-                .removeClass('hidden')
-                .hide()
-                .fadeIn(200);
-
-            setTimeout(() => {
-                $('#appToast').fadeOut(300);
-            }, duration);
-        }
-
-        function showConfirm(text, onConfirm) {
-
-            $('#confirmText').text(text);
-
-            $('#appConfirm')
-                .removeClass('hidden')
-                .addClass('flex');
-
-            $('#confirmOk').off('click').on('click', function() {
-                $('#appConfirm').addClass('hidden').removeClass('flex');
-                if (typeof onConfirm === 'function') {
-                    onConfirm();
-                }
-            });
-
-            $('#confirmCancel').off('click').on('click', function() {
-                $('#appConfirm').addClass('hidden').removeClass('flex');
-            });
-        }
     });
 </script>
+
+<?php echo view('components/toast'); ?>

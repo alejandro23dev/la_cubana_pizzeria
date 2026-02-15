@@ -38,10 +38,6 @@
     <!-- jQuery -->
     <script src="<?php echo base_url('public/assets/jquery/dist/jquery.min.js'); ?>"></script>
 
-    <!-- SWEET toast 2 -->
-    <script src="<?= base_url('public/assets/sweetalert2/dist/sweetalert2.all.min.js'); ?>"></script>
-    <link rel="stylesheet" href="<?= base_url('public/assets/sweetalert2/dist/sweetalert2.min.css'); ?>">
-
     <style>
         .separator-fire {
             position: relative;
@@ -137,6 +133,19 @@
         </div>
     </nav>
 
+    <!-- TOAST ALERT -->
+    <div id="appToast" class="fixed top-6 right-6 z-50 hidden">
+
+        <div class="flex items-center gap-3 
+                bg-neutral-900 border border-white/10
+                px-5 py-4 rounded-xl shadow-2xl
+                min-w-[280px]">
+
+            <div id="toastIcon" class="text-2xl"></div>
+
+            <div id="toastText" class="text-sm font-semibold"></div>
+        </div>
+    </div>
 
     <!-- Espaciador -->
     <div class="h-20"></div>
@@ -299,14 +308,14 @@
                                 <div class="flex gap-3 overflow-x-auto pb-2">
 
                                     <!-- TODOS -->
-                                    <button class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-red-600 text-gray-600 border border-gray-300 transition-all duration-200"
+                                    <button class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-red-600 text-gray-600 border border-gray-300 transition-all duration-200 cursor-pointer"
                                         data-category="all">
                                         Todos
                                     </button>
 
                                     <?php foreach ($categories as $cat) { ?>
                                         <button
-                                            class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-transparent text-gray-600 border border-gray-300 transition-all duration-200"
+                                            class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-transparent text-gray-600 border border-gray-300 transition-all duration-200 cursor-pointer"
                                             data-category="<?= $cat->id ?>">
                                             <?= esc($cat->name) ?>
                                         </button>
@@ -463,7 +472,7 @@
         </button>
     </div>
 
-    <div id="modalCheckout" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+    <div id="modalCheckout" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
         <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm relative">
 
             <button id="closeCheckout" class="absolute top-3 right-3 text-white/60">✕</button>
@@ -623,16 +632,6 @@
                 }
             });
         });
-
-        function toast(icon, message) {
-            Swal.fire({
-                icon: icon, // success | error | warning | info
-                title: message,
-                showConfirmButton: false,
-                timer: 2500,
-                timerProgressBar: true
-            });
-        }
     </script>
 
     <!-- SCRIPT CARRITO -->
@@ -665,7 +664,7 @@
                 let qty = parseInt(qtyRaw, 10);
 
                 if (isNaN(qty) || qty < 1) {
-                    toast('error', 'La cantidad mínima es 1');
+                    showToast('⚠️', 'La cantidad mínima es 1');
                     $('#qtyInput').val(1).focus();
                     return;
                 }
@@ -725,24 +724,24 @@
                 let phoneRegex = /^\+?[0-9]{7,15}$/;
 
                 if (name === '' || phone === '') {
-                    toast('error', 'Debes ingresar tu nombre y teléfono');
+                    showToast('⚠️', 'Debes ingresar tu nombre y teléfono');
                     return;
                 }
 
                 if (!nameRegex.test(name)) {
-                    toast('error', 'El nombre solo puede contener letras');
+                    showToast('⚠️', 'El nombre solo puede contener letras');
                     $('#clientName').focus();
                     return;
                 }
 
                 if (!phoneRegex.test(phone)) {
-                    toast('error', 'Teléfono inválido');
+                    showToast('⚠️', 'Teléfono inválido');
                     $('#clientPhone').focus();
                     return;
                 }
 
                 if (cart.length === 0 || name === '' || phone === '') {
-                    toast('error', 'Debes añadir productos, nombre y teléfono');
+                    showToast('⚠️', 'Debes añadir productos, nombre y teléfono');
                     return;
                 }
 
@@ -769,13 +768,13 @@
                     },
                     success: res => {
                         if (res.error === 0) {
-                            toast('success', 'Orden enviada correctamente');
+                            showToast('✅', 'Orden enviada correctamente');
                             cart = [];
                             saveCart();
                             renderCart();
                             $('#modalCheckout').addClass('hidden');
                         } else {
-                            toast('error', 'Error al procesar la orden');
+                            showToast('⚠️', 'Error al procesar la orden');
                         }
                     }
                 });
@@ -848,6 +847,9 @@
             });
         });
     </script>
+
+    <?php echo view('components/toast'); ?>
+
 </body>
 
 </html>

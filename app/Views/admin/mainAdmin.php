@@ -197,16 +197,18 @@
 
             /* ---------- LOGOUT ---------- */
             function logout() {
-                if (!confirm('¿Deseas cerrar sesión?')) return;
-
-                $.post("<?= base_url('admin/logout'); ?>", function() {
-                    window.location.href = "<?= base_url('/'); ?>";
+                showConfirm('¿Deseas cerrar sesión?', function() {
+                    $.post("<?= base_url('admin/logout'); ?>", function() {
+                        window.location.href = "<?= base_url('/'); ?>";
+                    });
                 });
             }
 
             $('#btnLogout, #btnLogoutMobile').on('click', logout);
         });
     </script>
+
+    <?php echo view('components/toast'); ?>
 
 </body>
 

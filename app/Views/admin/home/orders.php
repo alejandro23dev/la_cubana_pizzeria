@@ -192,13 +192,7 @@
             let newStatus = select.val();
             let oldStatus = select.data('original');
 
-            // if (!confirm('¿Estás seguro de cambiar el estado de esta orden?')) {
-            //    volver al estado anterior
-            //     select.val(oldStatus);
-            //     return;
-            // }
-
-            showConfirm('¿Estas seguro de cambiar el estado de esta orden?', select, oldStatus, function() {
+            showOrderStatusConfirm('¿Estas seguro de cambiar el estado de esta orden?', select, oldStatus, function() {
                 $.ajax({
                     url: "<?= base_url('admin/updateOrderStatus'); ?>",
                     type: "POST",
@@ -210,6 +204,7 @@
                     success: function(res) {
                         if (res.error === 0) {
                             select.data('original', newStatus);
+                            showToast('✅', 'Estado actualizado correctamente');
                         } else {
                             showToast('⚠️', 'Error al actualizar el estado');
                             select.val(oldStatus);
@@ -222,41 +217,7 @@
                 });
             });
         });
-
-        function showToast(icon, text, duration = 3000) {
-
-            $('#toastIcon').html(icon);
-            $('#toastText').text(text);
-
-            $('#appToast')
-                .removeClass('hidden')
-                .hide()
-                .fadeIn(200);
-
-            setTimeout(() => {
-                $('#appToast').fadeOut(300);
-            }, duration);
-        }
-
-        function showConfirm(text, select, oldStatus, onConfirm) {
-
-            $('#confirmText').text(text);
-
-            $('#appConfirm')
-                .removeClass('hidden')
-                .addClass('flex');
-
-            $('#confirmOk').off('click').on('click', function() {
-                $('#appConfirm').addClass('hidden').removeClass('flex');
-                if (typeof onConfirm === 'function') {
-                    onConfirm();
-                }
-            });
-
-            $('#confirmCancel').off('click').on('click', function() {
-                $('#appConfirm').addClass('hidden').removeClass('flex');
-                select.val(oldStatus);
-            });
-        }
     });
 </script>
+
+<?php echo view('components/toast'); ?>

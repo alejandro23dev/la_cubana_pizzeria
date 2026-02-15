@@ -64,7 +64,7 @@
                 <button
                     type="submit"
                     id="loginBtn"
-                    class="w-full py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition flex items-center justify-center gap-2">
+                    class="w-full py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition flex items-center justify-center gap-2 cursor-pointer">
 
                     <span id="btnText">Entrar</span>
 
