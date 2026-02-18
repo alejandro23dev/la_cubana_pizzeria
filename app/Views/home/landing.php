@@ -584,7 +584,7 @@
 
         <!-- PIE FINAL -->
         <div class="mt-6 text-center text-sm text-white/50">
-            © <?= date('Y'); ?> Pizzería La Cubana · Hecho por <a href="https://www.instagram.com/aleh.vzq/" target="_blank" class="text-red-500 hover:underline">Alejandro Vázquez</a>
+            © <?= date('Y'); ?> Pizzería La Cubana · Hecho por <a href="https://avsoftwares.dev/" target="_blank" class="text-red-500 hover:underline">AVSoftwares</a>
         </div>
     </footer>
 
