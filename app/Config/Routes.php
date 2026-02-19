@@ -27,3 +27,8 @@ $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
 
     $routes->post('logout', 'AdminController::logout');
 });
+
+$routes->set404Override(function () {
+    header("Location: " . base_url());
+    exit;
+});
