@@ -14,7 +14,8 @@
     "ext-intl": "*",
     "ext-mbstring": "*",
     "laminas/laminas-escaper": "^2.18",
-    "psr/log": "^3.0"
+    "psr/log": "^3.0",
+    "resend/resend-php": "^1.1"
   },
   "require-dev": {
     "codeigniter/phpstan-codeigniter": "^1.5",
@@ -90,9 +91,6 @@
   "scripts": {
     "post-update-cmd": [
       "CodeIgniter\\ComposerScripts::postUpdate"
-    ],
-    "post-autoload-dump": [
-      "@composer update --ansi --working-dir=utils"
     ],
     "analyze": [
       "Composer\\Config::disableProcessTimeout",

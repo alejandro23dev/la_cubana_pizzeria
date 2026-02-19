@@ -4,11 +4,16 @@ namespace App\Controllers;
 
 use App\Models\MainModel;
 
+use Resend;
+use GuzzleHttp\Client;
+
 class Home extends BaseController
 {
     protected $objSession;
     protected $objRequest;
     protected $objMainModel;
+
+    protected $resend;
 
     public function __construct()
     {
@@ -18,6 +23,8 @@ class Home extends BaseController
         $this->objRequest = \Config\Services::request();
         # Models
         $this->objMainModel = new MainModel;
+        # Resend
+        $this->resend = Resend::client(env('RESEND_API_KEY'));
     }
 
     public function landing()
@@ -29,6 +36,13 @@ class Home extends BaseController
             'products' => $products,
             'categories' => $categories
         ];
+
+        $this->resend->emails->send([
+            'from' => 'Acme <onboarding@resend.dev>',
+            'to' => ['miguelalejandro230902@gmail.com'],
+            'subject' => 'hello world',
+            'html' => '<strong>it works!</strong>',
+        ]);
 
         return view('home/landing', $data);
     }
