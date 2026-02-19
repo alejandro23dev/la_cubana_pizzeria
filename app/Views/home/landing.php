@@ -38,13 +38,17 @@
     <!-- jQuery -->
     <script src="<?php echo base_url('public/assets/jquery/dist/jquery.min.js'); ?>"></script>
 
-     <!-- Font Cabin -->
+    <!-- Font Cabin -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Cabin:ital,wght@0,400..700;1,400..700&family=IBM+Plex+Sans+Condensed:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Noto+Serif:ital,wght@0,100..900;1,100..900&family=Nova+Square&family=Playwrite+NZ+Basic:wght@100..400&family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
     <style>
         body {
             font-family: "Cabin", sans-serif;
+        }
+
+        button {
+            cursor: pointer;
         }
 
         .separator-fire {
@@ -316,14 +320,14 @@
                                 <div class="flex gap-3 overflow-x-auto pb-2">
 
                                     <!-- TODOS -->
-                                    <button class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-red-600 text-gray-600 border border-gray-300 transition-all duration-200 cursor-pointer"
+                                    <button class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-red-600 text-gray-600 border border-gray-300 transition-all duration-200 "
                                         data-category="all">
                                         Todos
                                     </button>
 
                                     <?php foreach ($categories as $cat) { ?>
                                         <button
-                                            class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-transparent text-gray-600 border border-gray-300 transition-all duration-200 cursor-pointer"
+                                            class="category-tab px-5 py-2 rounded-lg text-sm font-semibold bg-transparent text-gray-600 border border-gray-300 transition-all duration-200 "
                                             data-category="<?= $cat->id ?>">
                                             <?= esc($cat->name) ?>
                                         </button>
@@ -403,7 +407,7 @@
 
                                         <!-- BOTÓN -->
                                         <button
-                                            class="btn-order px-4 py-2 rounded-full text-sm transition cursor-pointer
+                                            class="btn-order px-4 py-2 rounded-full text-sm transition 
   <?= $isPopular ? 'bg-yellow-400 hover:bg-yellow-500 font-bold' : 'bg-red-600 hover:bg-red-700 text-white'; ?>"
                                             data-id="<?= $p->id; ?>"
                                             data-name="<?= esc($p->name); ?>"
@@ -475,7 +479,7 @@
         </div>
 
         <button id="openCheckout"
-            class="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold cursor-pointer">
+            class="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold ">
             Confirmar pedido
         </button>
     </div>
@@ -494,7 +498,7 @@
                 class="w-full bg-neutral-800 px-3 py-2 rounded mb-4">
 
             <button id="confirmOrder"
-                class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold cursor-pointer">
+                class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold ">
                 Confirmar orden
             </button>
         </div>
@@ -764,6 +768,8 @@
                     quantity: p.quantity
                 }));
 
+                $('#confirmOrder').text('Confirmando...').prop('disabled', true);
+
                 $.ajax({
                     url: "<?= base_url('makeOrder'); ?>",
                     type: "POST",
@@ -783,7 +789,12 @@
                             $('#modalCheckout').addClass('hidden');
                         } else {
                             showToast('⚠️', 'Error al procesar la orden');
+                            $('#confirmOrder').text('Confirmar orden').prop('disabled', false);
                         }
+                    },
+                    error: () => {
+                        showToast('⚠️', 'Error de conexión');
+                        $('#confirmOrder').text('Confirmar orden').prop('disabled', false);
                     }
                 });
             });

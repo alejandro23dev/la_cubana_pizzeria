@@ -5,7 +5,6 @@ namespace App\Controllers;
 use App\Models\MainModel;
 
 use Resend;
-use GuzzleHttp\Client;
 
 class Home extends BaseController
 {
@@ -37,13 +36,6 @@ class Home extends BaseController
             'categories' => $categories
         ];
 
-        $this->resend->emails->send([
-            'from' => 'Acme <onboarding@resend.dev>',
-            'to' => ['miguelalejandro230902@gmail.com'],
-            'subject' => 'hello world',
-            'html' => '<strong>it works!</strong>',
-        ]);
-
         return view('home/landing', $data);
     }
 
@@ -64,6 +56,25 @@ class Home extends BaseController
         ];
 
         $result = $this->objMainModel->makeOrder($data);
+
+        if (isset($result['error']) && $result['error'] == 0) {
+
+            $orderId = $result['id'];
+
+            $order = $this->objMainModel->getOrder($orderId);
+
+            if ($order) {
+
+                $emailHTML = view('emails/new_order', ['order' => $order]);
+
+                $this->resend->emails->send([
+                    'from' => 'La Cubana Pizzería <info@lacubanapizzeria.com>',
+                    'to' => [env('RESEND_EMAIL_TO')],
+                    'subject' => 'Nueva orden #' . $order->order_id,
+                    'html' => $emailHTML,
+                ]);
+            }
+        }
 
         return $this->response->setJSON($result);
     }

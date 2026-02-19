@@ -141,6 +141,56 @@ class MainModel extends Model
 		return $orders;
 	}
 
+	public function getOrder($id)
+	{
+		$order = $this->db->table('orders')
+			->where('id', $id)
+			->get()
+			->getRow();
+
+		if (!$order) {
+			return null;
+		}
+
+		$order->products_readable = [];
+
+		if (!empty($order->products)) {
+
+			$products = json_decode($order->products, true);
+
+			if (is_array($products)) {
+
+				$ids = array_column($products, 'id');
+
+				if (!empty($ids)) {
+
+					$items = $this->db->table('products')
+						->select('id, name')
+						->whereIn('id', $ids)
+						->get()
+						->getResultArray();
+
+					$map = [];
+					foreach ($items as $i) {
+						$map[$i['id']] = $i['name'];
+					}
+
+					foreach ($products as $p) {
+						if (isset($map[$p['id']])) {
+							$order->products_readable[] =
+								$p['quantity'] . ' - ' . $map[$p['id']];
+						} else {
+							$order->products_readable[] =
+								$p['quantity'] . ' - Este producto ya no existe';
+						}
+					}
+				}
+			}
+		}
+
+		return $order;
+	}
+	
 	public function updateOrderStatus($id, $status)
 	{
 		$data = ['status' => $status];
