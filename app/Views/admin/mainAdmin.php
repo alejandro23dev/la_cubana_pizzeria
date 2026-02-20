@@ -213,7 +213,7 @@
 
     <!-- CHANGE PASSWORD MODAL -->
     <div id="changePasswordModal"
-        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 w-full max-w-md p-6 rounded-xl">
 

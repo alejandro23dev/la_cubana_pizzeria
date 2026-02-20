@@ -151,7 +151,7 @@
 
     <!-- MODAL -->
     <div id="modalAddProduct"
-        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
             <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
@@ -198,7 +198,7 @@
 
     <!-- MODAL ADD CATEGORY -->
     <div id="modalAddCategory"
-        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
 
         <div class="bg-neutral-900 max-w-md w-full p-6 rounded-xl relative">
             <button id="closeModalCategory" class="absolute top-3 right-3 text-xl">✕</button>
