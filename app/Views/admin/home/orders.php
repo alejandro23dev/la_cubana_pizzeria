@@ -15,8 +15,7 @@
 
             <?php foreach ($orders as $o) { ?>
 
-                <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 hover:border-red-500 transition">
-
+                <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 hover:border-red-500 transition flex flex-col h-full">
                     <!-- ORDER ID -->
                     <div class="flex justify-between items-center mb-4">
                         <span class="text-sm text-white/60">Orden</span>
@@ -39,18 +38,23 @@
                         </p>
                     </div>
 
-                    <!-- PRODUCTOS (FUTURO) -->
-                    <div class="mb-4 text-sm text-white/40 italic">
-                        <?php if (!empty($o->products_readable)) { ?>
-                            <ul class="text-sm text-white/70 space-y-1">
-                                <?php foreach ($o->products_readable as $item) { ?>
-                                    <li>🍕 <?= esc($item); ?></li>
-                                <?php } ?>
-                            </ul>
-                        <?php } else { ?>
-                            <p class="text-white/40 text-sm">Sin productos</p>
-                        <?php } ?>
+                    <!-- PRODUCTOS -->
+                    <div class="mb-4">
+                        <div class="text-xs text-white/60 mb-2 uppercase tracking-wide">
+                            Productos
+                        </div>
 
+                        <div class="bg-neutral-800/40 rounded-lg p-3 h-32 overflow-y-auto custom-scroll">
+                            <?php if (!empty($o->products_readable)) { ?>
+                                <ul class="text-sm text-white/70 space-y-1">
+                                    <?php foreach ($o->products_readable as $item) { ?>
+                                        <li>🍕 <?= esc($item); ?></li>
+                                    <?php } ?>
+                                </ul>
+                            <?php } else { ?>
+                                <p class="text-white/40 text-sm">Sin productos</p>
+                            <?php } ?>
+                        </div>
                     </div>
 
                     <!-- TOTAL -->
@@ -91,10 +95,16 @@
                         </select>
                     </div>
 
+                    <!-- BOTÓN IMPRIMIR -->
+                    <div class="mt-6">
+                        <a href="<?= base_url('admin/printOrder/' . $o->id); ?>"
+                            target="_blank"
+                            class="w-full block text-center bg-neutral-800 text-white hover:bg-gray-200 py-2 rounded-lg font-semibold transition">
+                            🖨 Imprimir Ticket
+                        </a>
+                    </div>
                 </div>
-
             <?php } ?>
-
         </div>
 
     <?php } else { ?>

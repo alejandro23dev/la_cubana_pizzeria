@@ -215,6 +215,17 @@ class AdminController extends BaseController
         return $this->response->setJSON($result);
     }
 
+    public function printOrder($id)
+    {
+        $order = $this->objMainModel->getOrder($id);
+
+        if (!$order) {
+            return redirect()->to('/admin/orders');
+        }
+
+        return view('admin/ticket_view', ['order' => $order]);
+    }
+
     ## ADMINS
 
     public function admins()
