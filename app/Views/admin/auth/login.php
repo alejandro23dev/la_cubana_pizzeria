@@ -26,6 +26,10 @@
         body {
             font-family: "Cabin", sans-serif;
         }
+
+        button {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -74,7 +78,7 @@
                 <button
                     type="submit"
                     id="loginBtn"
-                    class="w-full py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition flex items-center justify-center gap-2 cursor-pointer">
+                    class="w-full py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition flex items-center justify-center gap-2">
 
                     <span id="btnText">Entrar</span>
 

@@ -9,7 +9,7 @@
 
         <!-- BOTÓN NUEVO ADMINISTRADOR -->
         <button id="btnOpenAddAdmin"
-            class="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition cursor-pointer">
+            class="mt-4 md:mt-0 inline-flex items-center gap-2 px-6 py-3 bg-red-600 hover:bg-red-700 rounded-lg font-semibold transition">
             Nuevo Administrador
         </button>
     </div>
@@ -25,7 +25,7 @@
                 $isMe = session()->get('admin_email') === $a->email;
             ?>
 
-                <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 hover:border-red-500 transition cursor-pointer">
+                <div class="bg-neutral-900 rounded-xl border border-white/10 p-6 hover:border-red-500 transition">
 
                     <!-- AVATAR -->
                     <div class="flex items-center gap-4 mb-4">
@@ -103,7 +103,7 @@
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
+            <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
 
             <h2 class="text-2xl font-bold mb-4">Nuevo Administrador</h2>
 
@@ -113,7 +113,7 @@
                 <input type="password" id="txt-password" name="password" placeholder="Contraseña" required class="bg-neutral-800 w-full px-3 py-2 rounded">
 
                 <button id="btnAddAdmin"
-                    class="w-full bg-red-600 py-2 rounded font-semibold cursor-pointer">
+                    class="w-full bg-red-600 py-2 rounded font-semibold">
                     Guardar
                 </button>
             </div>

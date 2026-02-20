@@ -26,6 +26,10 @@
         body {
             font-family: "Cabin", sans-serif;
         }
+
+        button {
+            cursor: pointer;
+        }
     </style>
 </head>
 
@@ -71,7 +75,7 @@
                 <!-- USUARIO (desktop) -->
                 <div class="relative hidden md:block">
                     <button id="btnUserMenu"
-                        class="flex items-center gap-3 bg-neutral-900 px-4 py-2 rounded-lg hover:bg-neutral-800 transition cursor-pointer">
+                        class="flex items-center gap-3 bg-neutral-900 px-4 py-2 rounded-lg hover:bg-neutral-800 transition">
                         <div class="text-right leading-tight">
                             <p class="text-sm font-semibold">
                                 <?= esc(session()->get('admin_user')); ?>
@@ -84,10 +88,15 @@
                     </button>
 
                     <div id="userDropdown"
-                        class="absolute right-0 mt-2 w-44 bg-neutral-900 border border-white/10 rounded-lg shadow-lg hidden">
+                        class="absolute right-0 mt-2 w-48 bg-neutral-900 border border-white/10 rounded-lg shadow-lg hidden">
+
+                        <button id="btnChangePassword"
+                            class="w-full text-left px-4 py-3 text-sm hover:bg-neutral-800 transition">
+                            🔐 Cambiar contraseña
+                        </button>
 
                         <button id="btnLogout"
-                            class="w-full text-left px-4 py-3 text-sm hover:bg-red-600 transition cursor-pointer">
+                            class="w-full text-left px-4 py-3 text-sm hover:bg-red-600 transition">
                             🚪 Cerrar sesión
                         </button>
                     </div>
@@ -173,17 +182,72 @@
 
             <div class="flex justify-end gap-3">
                 <button id="confirmCancel"
-                    class="px-4 py-2 bg-neutral-700 rounded-lg cursor-pointer">
+                    class="px-4 py-2 bg-neutral-700 rounded-lg">
                     Cancelar
                 </button>
 
                 <button id="confirmOk"
-                    class="px-4 py-2 bg-red-600 rounded-lg font-semibold cursor-pointer">
+                    class="px-4 py-2 bg-red-600 rounded-lg font-semibold">
                     Confirmar
                 </button>
             </div>
         </div>
     </div>
+
+    <!-- CHANGE PASSWORD MODAL -->
+    <div id="changePasswordModal"
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
+
+        <div class="bg-neutral-900 w-full max-w-md p-6 rounded-xl">
+
+            <h2 class="text-lg font-bold mb-6">Cambiar contraseña</h2>
+
+            <!-- Actual -->
+            <div class="mb-4">
+                <label class="text-sm text-white/70 block mb-1">
+                    Contraseña Actual
+                </label>
+
+                <div class="relative">
+                    <input type="password" id="currentPassword"
+                        class="w-full bg-neutral-800 px-4 py-2 rounded-lg pr-20 outline-none">
+
+                    <span class="absolute inset-y-0 right-3 text-xs font-semibold text-red-400 hover:text-red-500 cursor-pointer togglePassword">
+                        Mostrar
+                    </span>
+                </div>
+            </div>
+
+            <!-- Nueva -->
+            <div class="mb-6">
+                <label class="text-sm text-white/70 block mb-1">
+                    Contraseña Nueva
+                </label>
+
+                <div class="relative">
+                    <input type="password" id="newPassword"
+                        class="w-full bg-neutral-800 px-4 py-2 rounded-lg pr-20 outline-none">
+
+                    <span class="absolute inset-y-0 right-3 text-xs font-semibold text-red-400 hover:text-red-500 cursor-pointer togglePassword">
+                        Mostrar
+                    </span>
+                </div>
+            </div>
+
+            <div class="flex justify-end gap-3">
+                <button id="cancelChangePassword"
+                    class="px-4 py-2 bg-neutral-700 rounded-lg">
+                    Cancelar
+                </button>
+
+                <button id="confirmChangePassword"
+                    class="px-4 py-2 bg-red-600 rounded-lg font-semibold">
+                    Cambiar
+                </button>
+            </div>
+        </div>
+    </div>
+
 
     <?php echo $page; ?>
 
@@ -215,6 +279,85 @@
             }
 
             $('#btnLogout, #btnLogoutMobile').on('click', logout);
+
+            /* ---------- OPEN CHANGE PASSWORD ---------- */
+            $('#btnChangePassword').on('click', function() {
+                $('#userDropdown').addClass('hidden');
+                $('#changePasswordModal').removeClass('hidden').addClass('flex');
+            });
+
+            /* ---------- CLOSE MODAL ---------- */
+            $('#cancelChangePassword').on('click', function() {
+                $('#changePasswordModal').addClass('hidden').removeClass('flex');
+            });
+
+            /* ---------- TOGGLE PASSWORD VISIBILITY ---------- */
+            $('.togglePassword').on('click', function() {
+
+                const input = $(this).siblings('input');
+
+                if (input.attr('type') === 'password') {
+                    input.attr('type', 'text');
+                    $(this).text('Ocultar');
+                } else {
+                    input.attr('type', 'password');
+                    $(this).text('Mostrar');
+                }
+
+            });
+
+            /* ---------- CHANGE PASSWORD ---------- */
+            $('#confirmChangePassword').on('click', function() {
+
+                const currentPassword = $('#currentPassword').val().trim();
+                const newPassword = $('#newPassword').val().trim();
+
+                if (!currentPassword || !newPassword) {
+                    showToast('❌ Todos los campos son obligatorios');
+                    return;
+                }
+
+                if (currentPassword.length < 6 || newPassword.length < 6) {
+                    showToast('⚠️ Mínimo 6 caracteres en ambas contraseñas');
+                    return;
+                }
+
+                $('#confirmChangePassword').html('Procesando...').attr('disabled', true);
+                $('#cancelChangePassword').attr('disabled', true);
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('admin/changePassword'); ?>",
+                    data: {
+                        currentPassword: currentPassword,
+                        newPassword: newPassword
+                    },
+                    dataType: "json",
+                    success: function(response) {
+                        switch (response.error) {
+                            case 0:
+                                showToast('✅ Contraseña actualizada correctamente');
+                                $('#confirmChangePassword').html('Cambiar').attr('disabled', false);
+                                $('#cancelChangePassword').attr('disabled', false);
+                                $('#changePasswordModal').addClass('hidden').removeClass('flex');
+                                $('#currentPassword').val('');
+                                $('#newPassword').val('');
+                                break;
+                            case 1:
+                                showToast('❌ ' + response.message);
+                                $('#confirmChangePassword').html('Cambiar').attr('disabled', false);
+                                $('#cancelChangePassword').attr('disabled', false);
+                                break;
+                        }
+                    },
+                    error: function() {
+                        showToast('❌ Error al conectar con el servidor');
+                        $('#confirmChangePassword').html('Cambiar').attr('disabled', false);
+                        $('#cancelChangePassword').attr('disabled', false);
+                    }
+                });
+            });
+
         });
     </script>
 

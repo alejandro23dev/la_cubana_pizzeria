@@ -117,7 +117,7 @@
         <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm text-center relative">
 
             <button id="closePhoneModal"
-                class="absolute top-3 right-3 text-white/60 hover:text-white text-xl cursor-pointer">
+                class="absolute top-3 right-3 text-white/60 hover:text-white text-xl">
                 ✕
             </button>
 
@@ -145,7 +145,7 @@
                 </a>
 
                 <button id="cancelPhoneModal"
-                    class="bg-neutral-700 hover:bg-neutral-600 py-2 rounded transition cursor-pointer">
+                    class="bg-neutral-700 hover:bg-neutral-600 py-2 rounded transition">
                     Cancelar
                 </button>
             </div>

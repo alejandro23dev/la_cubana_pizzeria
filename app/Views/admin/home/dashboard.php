@@ -18,13 +18,13 @@
                 class="inline-flex items-center justify-center gap-2 px-6 py-3 rounded-lg font-semibold transition
             <?= empty($categories)
                 ? 'bg-gray-600 cursor-not-allowed opacity-60'
-                : 'bg-red-600 hover:bg-red-700 cursor-pointer' ?>">
+                : 'bg-red-600 hover:bg-red-700' ?>">
                 Nuevo Producto
             </button>
 
             <!-- BOTÓN NUEVA CATEGORÍA -->
             <button id="btnOpenAddCategory"
-                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition cursor-pointer">
+                class="inline-flex items-center justify-center gap-2 px-6 py-3 bg-blue-600 hover:bg-blue-700 rounded-lg font-semibold transition">
                 Nueva Categoría
             </button>
 
@@ -119,19 +119,19 @@
                         <div class="flex items-center gap-2">
                             <input type="checkbox" id="cbx-popular-<?= $p->id ?>"
                                 <?= $isPopular ? 'checked' : '' ?>
-                                class="accent-yellow-400 cursor-pointer">
+                                class="accent-yellow-400">
                             <label for="cbx-popular-<?= $p->id ?>" class="text-sm text-white/70">
                                 Pizza popular
                             </label>
                         </div>
 
                         <div class="flex gap-3 pt-3">
-                            <button class="btn-update flex-1 bg-blue-600 py-2 rounded font-semibold cursor-pointer"
+                            <button class="btn-update flex-1 bg-blue-600 py-2 rounded font-semibold"
                                 data-id="<?= $p->id ?>">
                                 Actualizar
                             </button>
 
-                            <button class="btn-delete flex-1 bg-red-700 py-2 rounded font-semibold cursor-pointer"
+                            <button class="btn-delete flex-1 bg-red-700 py-2 rounded font-semibold"
                                 data-id="<?= $p->id ?>"
                                 data-img="images/pizzas/<?= $p->img ?>">
                                 Eliminar
@@ -154,7 +154,7 @@
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 max-w-lg w-full p-6 rounded-xl relative">
-            <button id="closeModal" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
+            <button id="closeModal" class="absolute top-3 right-3 text-xl">✕</button>
 
             <h2 class="text-2xl font-bold mb-4">Nuevo Producto</h2>
 
@@ -189,7 +189,7 @@
                 </select>
 
                 <button type="submit" id="btnAddProduct"
-                    class="w-full bg-red-600 py-2 rounded font-semibold cursor-pointer">
+                    class="w-full bg-red-600 py-2 rounded font-semibold">
                     Guardar
                 </button>
             </form>
@@ -201,7 +201,7 @@
         class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
 
         <div class="bg-neutral-900 max-w-md w-full p-6 rounded-xl relative">
-            <button id="closeModalCategory" class="absolute top-3 right-3 text-xl cursor-pointer">✕</button>
+            <button id="closeModalCategory" class="absolute top-3 right-3 text-xl">✕</button>
 
             <h2 class="text-2xl font-bold mb-4">Nueva Categoría</h2>
 
@@ -214,7 +214,7 @@
 
                 <button type="submit"
                     id="btnAddCategory"
-                    class="w-full bg-blue-600 py-2 rounded font-semibold cursor-pointer">
+                    class="w-full bg-blue-600 py-2 rounded font-semibold">
                     Guardar Categoría
                 </button>
             </form>

@@ -33,6 +33,36 @@ class AdminController extends BaseController
         return view('admin/mainAdmin', $data);
     }
 
+    public function changePassword()
+    {
+        $current_password = trim($this->objRequest->getPost('currentPassword'));
+        $new_password = trim($this->objRequest->getPost('newPassword'));
+
+        if ($current_password === '' || $new_password === '') {
+            return $this->response->setJSON([
+                'error' => 1,
+                'message'   => 'Todos los campos son obligatorios'
+            ]);
+        }
+
+        $admin_id = $this->objSession->get('admin_id');
+        $admin = $this->objMainModel->getAdminById($admin_id);
+
+        if (!$admin || !password_verify($current_password, $admin->password)) {
+            return $this->response->setJSON([
+                'error' => 1,
+                'message'   => 'Contraseña actual incorrecta'
+            ]);
+        }
+
+        $hashedPassword = password_hash($new_password, PASSWORD_DEFAULT);
+        $this->objMainModel->objUpdate('admin', ['password' => $hashedPassword], $admin_id);
+
+        return $this->response->setJSON([
+            'error' => 0
+        ]);
+    }
+
     public function updateProduct()
     {
         $id = $this->objRequest->getPost('id');

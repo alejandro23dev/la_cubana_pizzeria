@@ -18,6 +18,7 @@ $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
     $routes->post('updateProduct', 'AdminController::updateProduct');
     $routes->post('deleteProduct', 'AdminController::deleteProduct');
     $routes->post('addCategory', 'AdminController::addCategory');
+    $routes->post('changePassword', 'AdminController::changePassword');
 
     $routes->get('admins', 'AdminController::admins');
     $routes->post('addAdmin', 'AdminController::addAdmin');

@@ -190,7 +190,7 @@ class MainModel extends Model
 
 		return $order;
 	}
-	
+
 	public function updateOrderStatus($id, $status)
 	{
 		$data = ['status' => $status];
@@ -207,6 +207,13 @@ class MainModel extends Model
 	{
 		return  $this->db->table('admin')
 			->where('email', $email)
+			->get()->getRow();
+	}
+
+	public function getAdminById($id)
+	{
+		return  $this->db->table('admin')
+			->where('id', $id)
 			->get()->getRow();
 	}
 }
