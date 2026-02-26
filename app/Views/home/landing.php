@@ -20,7 +20,8 @@
 
     <link rel="canonical" href="<?= base_url(); ?>">
 
-    <link rel="shortcut icon" href="<?= base_url('public/favicon.ico'); ?>" type="image/x-icon">
+    <!-- Favicon -->
+    <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
 
     <!-- Open Graph -->
     <meta property="og:title" content="Pizzería La Cubana | Pizza Cubana en Georgia">
@@ -31,8 +32,6 @@
 
     <!-- Twitter -->
     <meta name="twitter:card" content="summary_large_image">
-
-    <link rel="shortcut icon" type="image/png" href="<?= base_url('public/favicon.ico'); ?>">
 
     <!-- Tailwind -->
     <link rel="stylesheet" href="<?= base_url('public/assets/css/styles.css') ?>">
