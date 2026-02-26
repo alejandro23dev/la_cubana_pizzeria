@@ -41,16 +41,22 @@
 
         <?php if (!empty($categories)) { ?>
 
-            <div class="flex flex-wrap gap-3">
+            <div class="flex flex-wrap overflow-x-auto no-scrollbar gap-3">
 
                 <?php foreach ($categories as $cat) { ?>
-                    <div class="bg-neutral-800 px-4 py-2 rounded-lg border border-white/10">
-                        <span class="font-semibold"><?= esc($cat->name) ?></span>
+                    <div class="bg-neutral-800 px-4 py-2 rounded-lg border border-white/10 flex items-center gap-3 whitespace-nowrap">
+                        <span class="font-semibold">
+                            <?= esc($cat->name) ?>
+                        </span>
+
+                        <button
+                            class="btn-delete-category text-red-500 hover:text-red-600 text-sm font-bold"
+                            data-id="<?= $cat->id ?>">
+                            ✕
+                        </button>
                     </div>
                 <?php } ?>
-
             </div>
-
         <?php } else { ?>
 
             <div class="bg-neutral-900 border border-yellow-500/40 p-4 rounded-lg">
@@ -92,7 +98,9 @@
 
                     <!-- IMAGEN -->
                     <img src="<?= base_url('public/images/pizzas/' . esc($p->img)); ?>"
-                        class="h-40 w-full object-cover">
+                        class="h-40 w-full object-cover"
+                        loading="lazy"
+                        decoding="async">
 
                     <!-- INFO -->
                     <div class="p-5 space-y-3">
@@ -387,6 +395,43 @@
                     btn.prop('disabled', false).text('Guardar Categoría');
                     showToast('⚠️', 'Error del servidor');
                 },
+            });
+        });
+
+        /* =======================
+   DELETE CATEGORY
+======================= */
+        $('.btn-delete-category').on('click', function() {
+
+            let id = $(this).data('id');
+            let btn = $(this);
+
+            showConfirm('¿Eliminar esta categoría?', function() {
+
+                btn.text('Eliminando...').prop('disabled', true);
+
+                $.ajax({
+                    type: "POST",
+                    url: "<?= base_url('admin/deleteCategory'); ?>",
+                    data: {
+                        id: id
+                    },
+                    dataType: "json",
+                    success: function(response) {
+
+                        if (response.error === 0) {
+                            location.reload();
+                        } else {
+                            showToast('⚠️', response.msg);
+                            btn.text('✕').prop('disabled', false);
+                        }
+
+                    },
+                    error: function() {
+                        showToast('⚠️', 'Error del servidor');
+                        btn.text('✕').prop('disabled', false);
+                    }
+                });
             });
         });
     });

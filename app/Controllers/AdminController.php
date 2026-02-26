@@ -193,6 +193,26 @@ class AdminController extends BaseController
         ]);
     }
 
+    public function deleteCategory()
+    {
+        $id = $this->objRequest->getPost('id');
+
+        $hasProducts = $this->objMainModel->getOneProductByCategoryId($id);
+
+        if ($hasProducts !== null) {
+            return $this->response->setJSON([
+                'error' => 1,
+                'msg'   => 'No se puede eliminar esta categoría porque tiene productos asociados.'
+            ]);
+        }
+
+        $this->objMainModel->objDelete('categories', $id);
+
+        return $this->response->setJSON([
+            'error' => 0
+        ]);
+    }
+
     ## ORDERS
 
     public function orders()

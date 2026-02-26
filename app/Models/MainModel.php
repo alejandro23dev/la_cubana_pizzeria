@@ -216,4 +216,28 @@ class MainModel extends Model
 			->where('id', $id)
 			->get()->getRow();
 	}
+
+	public function getOneProductByCategoryId($category_id)
+	{
+		return $this->db->table('products')
+			->where('category_id', $category_id)
+			->limit(1)
+			->get()
+			->getRow();
+	}
+
+	public function objDelete($table, $id)
+	{
+		$query = $this->db->table($table)->where('id', $id)->delete();
+
+		$result = array();
+		if ($query == true) {
+			$result['error'] = 0;
+			$result['id'] = $id;
+		} else {
+			$result['error'] = 1;
+		}
+
+		return $result;
+	}
 }
