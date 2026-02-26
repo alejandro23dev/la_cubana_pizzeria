@@ -115,6 +115,8 @@
             <div class="flex items-center gap-3">
                 <img src="<?= base_url('public/images/logo.png'); ?>"
                     alt="La Cubana"
+                    loading="lazy"
+                    decoding="async"
                     class="h-12 w-auto">
                 <span class="font-bold text-xl tracking-wide">LA CUBANA</span>
             </div>
@@ -173,7 +175,8 @@
                 autoplay
                 loop
                 muted
-                playsinline>
+                playsinline
+                preload="none">
                 <source src="<?= base_url('videos/hero.mp4'); ?>" type="video/mp4">
                 Tu navegador no soporta video HTML5.
             </video>
@@ -186,6 +189,8 @@
 
                 <img src="<?= base_url('public/images/logo.png'); ?>"
                     class="mx-auto h-48 mb-8 animate-fade-up"
+                    loading="lazy"
+                    decoding="async"
                     style="animation-delay: 0.2s">
 
                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight animate-fade-up"
@@ -377,6 +382,8 @@
                                 <!-- IMAGEN -->
                                 <img src="<?= base_url('public/images/pizzas/' . esc($p->img)); ?>"
                                     alt="<?= esc($p->name); ?>"
+                                    loading="lazy"
+                                    decoding="async"
                                     class="h-56 w-full object-cover">
 
                                 <!-- CONTENIDO -->
@@ -513,6 +520,8 @@
             <div class="text-center lg:text-left">
                 <img src="<?= base_url('public/images/logo.png'); ?>"
                     alt="La Cubana Pizzeria"
+                    loading="lazy"
+                    decoding="async"
                     class="h-24 mx-auto lg:mx-0 mb-6">
                 <p class="text-sm leading-relaxed mb-4">
                     Auténtico sabor cubano en cada pizza.
