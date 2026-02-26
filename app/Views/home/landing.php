@@ -20,6 +20,8 @@
 
     <link rel="canonical" href="<?= base_url(); ?>">
 
+    <link rel="shortcut icon" href="<?= base_url('public/favicon.ico'); ?>" type="image/x-icon">
+
     <!-- Open Graph -->
     <meta property="og:title" content="Pizzería La Cubana | Pizza Cubana en Georgia">
     <meta property="og:description" content="Auténtica pizza cubana artesanal en Moultrie, Georgia.">
@@ -868,6 +870,33 @@
     </script>
 
     <?php echo view('components/toast'); ?>
+
+    <!-- OFFLINE SCREEN -->
+    <div id="offlineScreen"
+        class="fixed inset-0 bg-black flex items-center justify-center hidden z-50">
+
+        <div class="text-center">
+            <h1 class="text-2xl font-bold mb-4">Sin conexión</h1>
+            <p class="text-white/60">Revisa tu conexión a internet.</p>
+        </div>
+    </div>
+
+    <script>
+        function updateConnectionStatus() {
+            if (!navigator.onLine) {
+                $('#offlineScreen').removeClass('hidden');
+            } else {
+                $('#offlineScreen').addClass('hidden');
+            }
+        }
+
+        $(document).ready(function() {
+            updateConnectionStatus();
+        });
+
+        window.addEventListener('offline', updateConnectionStatus);
+        window.addEventListener('online', updateConnectionStatus);
+    </script>
 
 </body>
 
