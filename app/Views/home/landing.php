@@ -414,16 +414,14 @@
                                         <?php } ?>
 
                                         <!-- BOTÓN -->
-                                        <?php if ($regionAvailable) { ?>
-                                            <button
-                                                class="btn-order px-4 py-2 rounded-full text-sm transition 
+                                        <button
+                                            class="btn-order px-4 py-2 rounded-full text-sm transition 
   <?= $isPopular ? 'bg-yellow-400 hover:bg-yellow-500 font-bold' : 'bg-red-600 hover:bg-red-700 text-white'; ?>"
-                                                data-id="<?= $p->id; ?>"
-                                                data-name="<?= esc($p->name); ?>"
-                                                data-price="<?= $hasOffer ? $p->new_price : $p->price; ?>">
-                                                Ordenar
-                                            </button>
-                                        <?php } ?>
+                                            data-id="<?= $p->id; ?>"
+                                            data-name="<?= esc($p->name); ?>"
+                                            data-price="<?= $hasOffer ? $p->new_price : $p->price; ?>">
+                                            Ordenar
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -905,24 +903,6 @@
         window.addEventListener('offline', updateConnectionStatus);
         window.addEventListener('online', updateConnectionStatus);
     </script>
-
-    <?php if (!$regionAvailable) { ?>
-        <div id="regionModal"
-            class="fixed inset-0 bg-black/80 flex items-center justify-center z-50">
-
-            <div class="bg-neutral-900 rounded-xl p-8 text-center max-w-md">
-                <h3 class="text-2xl font-bold mb-4">Servicio no disponible</h3>
-
-                <p class="text-white/70 mb-6">
-                    Actualmente no aceptamos pedidos en tu región (<?= esc($region); ?>).
-                </p>
-
-                <p class="text-white/50 text-sm">
-                    Estamos trabajando para expandir nuestro servicio.
-                </p>
-            </div>
-        </div>
-    <?php } ?>
 
 </body>
 
