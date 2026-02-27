@@ -537,23 +537,21 @@
 
             <!-- CONTACTO (MEJORADO) -->
             <div class="text-center">
-                <h3 class="text-lg font-semibold text-white mb-6">Contacto rápido</h3>
+                <h3 class="text-lg font-semibold text-white mb-6">Contacto</h3>
 
                 <div class="space-y-4">
-                    <a href="tel:12294560239"
+                    <a href="tel:+19125208544"
                         class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
-                        📞 <span class="font-semibold">229-456-0239</span>
+                        <span class="text-xl">🇪n</span>
+                        <span>📞</span>
+                        <span class="font-semibold">(912) 520-8544</span>
                     </a>
 
-                    <a href="tel:12294549662"
+                    <a href="tel:+12294549662"
                         class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
-                        📞 <span class="font-semibold">229-454-9662</span>
-                    </a>
-
-                    <a href="https://wa.me/12294560239"
-                        target="_blank"
-                        class="flex items-center justify-center gap-3 bg-green-600 hover:bg-green-700 text-white py-3 rounded-xl font-semibold transition">
-                        WhatsApp
+                        <span class="text-xl">🇪🇸</span>
+                        <span>📞</span>
+                        <span class="font-semibold">(229) 454-9662</span>
                     </a>
                 </div>
             </div>
