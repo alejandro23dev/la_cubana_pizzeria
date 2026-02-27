@@ -4,4 +4,7 @@
     # Redirigir todo a public/
     RewriteCond %{REQUEST_URI} !^/public/
     RewriteRule ^(.*)$ public/$1 [L]
+
+    RewriteCond %{HTTP_HOST} ^www\.lacubanapizzeria\.com [NC]
+RewriteRule ^(.*)$ https://lacubanapizzeria.com/$1 [L,R=301]
 </IfModule>
