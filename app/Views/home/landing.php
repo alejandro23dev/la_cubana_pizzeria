@@ -891,8 +891,16 @@
         function updateConnectionStatus() {
             if (!navigator.onLine) {
                 $('#offlineScreen').removeClass('hidden');
+
+                // 🔒 BLOQUEAR SCROLL
+                document.body.style.overflow = 'hidden';
+                document.documentElement.style.overflow = 'hidden';
             } else {
                 $('#offlineScreen').addClass('hidden');
+
+                // 🔓 RESTAURAR SCROLL
+                document.body.style.overflow = '';
+                document.documentElement.style.overflow = '';
             }
         }
 
