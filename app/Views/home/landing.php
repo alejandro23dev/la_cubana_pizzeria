@@ -190,7 +190,8 @@
                     class="mx-auto h-48 mb-8 animate-fade-up"
                     loading="lazy"
                     decoding="async"
-                    style="animation-delay: 0.2s">
+                    style="animation-delay: 0.2s"
+                    alt="">
 
                 <h1 class="text-5xl md:text-7xl font-extrabold tracking-tight animate-fade-up"
                     style="animation-delay: 0.4s">
