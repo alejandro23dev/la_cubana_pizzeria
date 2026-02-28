@@ -4,6 +4,8 @@ namespace App\Controllers;
 
 use App\Models\MainModel;
 
+use Config\Services;
+
 class AdminController extends BaseController
 {
     protected $objSession;
@@ -15,7 +17,7 @@ class AdminController extends BaseController
         # Session
         $this->objSession = session();
         # Services
-        $this->objRequest = \Config\Services::request();
+        $this->objRequest = Services::request();
         # Models
         $this->objMainModel = new MainModel;
     }
@@ -153,9 +155,18 @@ class AdminController extends BaseController
         $extension = $file->getExtension(); // png, jpg, etc
         $uniqueName = uniqid((string) microtime(true), true);
         $fileName   = $uniqueName . '.' . $extension;
+        $uploadPath = FCPATH . 'images/pizzas';
 
-        // 📁 Mover archivo a public/images/pizzas
-        $file->move(FCPATH . 'images/pizzas', $fileName);
+        // 📁 Mover primero
+        $file->move($uploadPath, $fileName);
+
+        // Ruta completa
+        $fullPath = $uploadPath . '/' . $fileName;
+
+        $image = Services::image()
+            ->withFile($fullPath)
+            ->resize(800, 800, true, 'height') // redimensiona manteniendo proporción
+            ->save($fullPath, 50); // 75 = calidad (0–100)
 
         // Guardar en BD (solo nombre.extensión)
         $this->objMainModel->objCreate('products', [
