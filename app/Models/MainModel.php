@@ -83,7 +83,7 @@ class MainModel extends Model
 
 	public function getOrders()
 	{
-		$orders = $this->db->table('orders')->get()->getResult();
+		$orders = $this->db->table('orders')->orderBy('ordered_at', 'DESC')->get()->getResult();
 
 		if (empty($orders)) {
 			return [];

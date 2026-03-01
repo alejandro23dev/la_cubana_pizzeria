@@ -114,7 +114,7 @@
             <div class="flex items-center gap-3">
                 <img src="<?= base_url('public/images/logo.png'); ?>"
                     alt="La Cubana"
-                    loading="lazy"
+                    fetchpriority="high"
                     decoding="async"
                     class="h-12 w-auto">
                 <span class="font-bold text-xl tracking-wide">LA CUBANA</span>
@@ -188,7 +188,7 @@
 
                 <img src="<?= base_url('public/images/logo.png'); ?>"
                     class="mx-auto h-48 mb-8 animate-fade-up"
-                    loading="lazy"
+                    fetchpriority="high"
                     decoding="async"
                     style="animation-delay: 0.2s"
                     alt="">
