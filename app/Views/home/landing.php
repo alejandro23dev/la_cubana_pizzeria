@@ -487,6 +487,11 @@
             <span id="cartTotal">$0.00</span>
         </div>
 
+        <button id="clearCart"
+            class="mt-3 w-full bg-neutral-700 hover:bg-neutral-600 py-2 rounded text-sm">
+            Vaciar carrito
+        </button>
+
         <button id="openCheckout"
             class="mt-3 w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold ">
             Confirmar pedido
@@ -527,13 +532,6 @@
                     Auténtico sabor cubano en cada pizza.
                     Tradición, calidad y pasión artesanal desde Moultrie 🍕
                 </p>
-
-                <!-- REDES -->
-                <!-- <div class="flex justify-center lg:justify-start gap-4 mt-4">
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-800 hover:bg-red-600 transition">📘</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-800 hover:bg-red-600 transition">📸</a>
-                    <a href="#" class="w-10 h-10 flex items-center justify-center rounded-full bg-neutral-800 hover:bg-red-600 transition">🐦</a>
-                </div> -->
             </div>
 
             <!-- CONTACTO (MEJORADO) -->
@@ -543,7 +541,7 @@
                 <div class="space-y-4">
                     <a href="tel:+19125208544"
                         class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
-                        <span class="text-xl">🇪n</span>
+                        <span class="text-xl">us</span>
                         <span>📞</span>
                         <span class="font-semibold">(912) 520-8544</span>
                     </a>
@@ -709,6 +707,27 @@
             });
 
             /* ---------- CARRITO ---------- */
+            $(document).on('click', '.remove-item', function() {
+                let id = $(this).data('id');
+
+                cart = cart.filter(p => p.id !== id);
+
+                saveCart();
+                renderCart();
+
+                showToast('🗑️', 'Producto eliminado');
+            });
+
+            $('#clearCart').click(function() {
+
+                cart = [];
+
+                saveCart();
+                renderCart();
+
+                showToast('🗑️', 'Carrito vaciado');
+            });
+
             function renderCart() {
                 if (cart.length === 0) {
                     $('#cartBox').addClass('hidden');
@@ -722,10 +741,16 @@
                 cart.forEach(p => {
                     total += p.price * p.quantity;
                     $('#cartItems').append(
-                        `<div class="flex justify-between">
-          <span>${p.name} x${p.quantity}</span>
-          <span>$${(p.price * p.quantity).toFixed(2)}</span>
-        </div>`
+                        `<div class="flex justify-between items-center border-b border-white/10 pb-1">
+    <div>
+        <span>${p.name} x${p.quantity}</span>
+        <div class="text-xs text-white/50">$${(p.price * p.quantity).toFixed(2)}</div>
+    </div>
+    <button class="remove-item text-red-500 text-xs hover:text-red-400"
+        data-id="${p.id}">
+        ✕
+    </button>
+</div>`
                     );
                 });
 
