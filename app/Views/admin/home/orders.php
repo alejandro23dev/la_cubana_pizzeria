@@ -219,6 +219,10 @@
 
 <script>
     $(document).ready(function() {
+        setInterval(function() {
+            window.location.reload();
+        }, 120000); // 120000 ms = 2 minutos
+
         // Abrir modal al hacer click en el teléfono
         $('.client-phone').on('click', function(e) {
             e.preventDefault();
