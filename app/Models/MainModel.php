@@ -141,6 +141,17 @@ class MainModel extends Model
 		return $orders;
 	}
 
+	public function checkNewOrders($lastId)
+	{
+		$orders = $this->db->table('orders')
+			->where('id >', $lastId)
+			->orderBy('ordered_at', 'DESC')
+			->get()
+			->getResult();
+
+		return $orders;
+	}
+
 	public function getOrder($id)
 	{
 		$order = $this->db->table('orders')

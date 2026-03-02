@@ -27,6 +27,8 @@ $routes->group('admin', ['filter' => 'adminauth'], function ($routes) {
     $routes->get('orders', 'AdminController::orders');
     $routes->post('updateOrderStatus', 'AdminController::updateOrderStatus');
     $routes->get('printOrder/(:num)', 'AdminController::printOrder/$1');
+    $routes->get('checkNewOrders', 'AdminController::checkNewOrders');
+    $routes->get('refreshOrders', 'AdminController::refreshOrders');
 
     $routes->post('logout', 'AdminController::logout');
 });

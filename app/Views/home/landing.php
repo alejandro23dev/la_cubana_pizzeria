@@ -149,7 +149,7 @@
     </nav>
 
     <!-- TOAST ALERT -->
-    <div id="appToast" class="fixed top-6 right-6 z-50 hidden">
+    <div id="appToast" class="fixed top-6 right-6 z-[80] hidden">
 
         <div class="flex items-center gap-3 
                 bg-neutral-900 border border-white/10
@@ -476,7 +476,7 @@
     </main>
 
     <div id="cartBox"
-        class="fixed bottom-6 right-6 bg-neutral-900 border border-white/10 rounded-xl p-4 w-72 hidden z-50">
+        class="fixed bottom-6 right-6 bg-neutral-900 border border-white/10 rounded-xl p-4 w-72 hidden z-40">
 
         <h4 class="font-bold mb-2">🛒 Tu pedido</h4>
 
@@ -498,7 +498,7 @@
         </button>
     </div>
 
-    <div id="modalCheckout" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-40">
+    <div id="modalCheckout" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-[60]">
         <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm relative">
 
             <button id="closeCheckout" class="absolute top-3 right-3 text-white/60">✕</button>
@@ -541,14 +541,14 @@
                 <div class="space-y-4">
                     <a href="tel:+19125208544"
                         class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
-                        <span class="text-xl">us</span>
+                        <span class="text-xl">English</span>
                         <span>📞</span>
                         <span class="font-semibold">(912) 520-8544</span>
                     </a>
 
                     <a href="tel:+12294549662"
                         class="flex items-center justify-center gap-3 bg-neutral-900 hover:bg-neutral-800 py-3 rounded-xl transition">
-                        <span class="text-xl">🇪🇸</span>
+                        <span class="text-xl">Español</span>
                         <span>📞</span>
                         <span class="font-semibold">(229) 454-9662</span>
                     </a>
@@ -560,7 +560,7 @@
                 <h3 class="text-lg font-semibold text-white mb-6">Horario</h3>
 
                 <ul class="space-y-3 text-sm">
-                    <li>🕒 Lun – Sáb: <strong>10:00 AM – 9:00 PM</strong></li>
+                    <li>🕒 Lun – Sáb: <strong>11:00 AM – 9:00 PM</strong></li>
                     <li>🕒 Domingo: <strong>12:00 PM – 8:00 PM</strong></li>
                 </ul>
             </div>
@@ -599,7 +599,7 @@
         </div>
     </footer>
 
-    <div id="modalQty" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-50">
+    <div id="modalQty" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-[70]">
         <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm text-center relative">
 
             <button id="closeQty" class="absolute top-3 right-3 text-white/60 hover:text-white">✕</button>
@@ -622,47 +622,89 @@
         </div>
     </div>
 
+    <?php echo view('components/toast'); ?>
+
+    <!-- OFFLINE SCREEN -->
+    <div id="offlineScreen"
+        class="fixed inset-0 bg-black flex items-center justify-center hidden z-50">
+
+        <div class="text-center">
+            <h1 class="text-2xl font-bold mb-4">Sin conexión</h1>
+            <p class="text-white/60">Revisa tu conexión a internet.</p>
+        </div>
+    </div>
+
+    <!-- SUCCESS MODAL -->
+    <div id="successModal"
+        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-[90]">
+
+        <div class="bg-neutral-900 
+                rounded-2xl px-10 py-10 text-center 
+                shadow-2xl max-w-sm w-full">
+
+            <div class="text-5xl mb-4">✅</div>
+
+            <h3 class="text-2xl font-bold text-green-400 mb-2">
+                ¡Orden realizada!
+            </h3>
+
+            <p class="text-white/70">
+                Su orden fue realizada con éxito.
+            </p>
+        </div>
+    </div>
+
     <script>
-        const menuBtn = document.getElementById('menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+        $(function() {
 
-        menuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
-        });
+            /* ==========================================
+               TOGGLE MENÚ MÓVIL
+            ========================================== */
+            const $menuBtn = $('#menu-btn');
+            const $mobileMenu = $('#mobile-menu');
 
-        document.querySelectorAll('[data-scroll]').forEach(link => {
-            link.addEventListener('click', e => {
+            $menuBtn.on('click', function() {
+                $mobileMenu.toggleClass('hidden');
+            });
+
+            $('[data-scroll]').on('click', function(e) {
+
                 e.preventDefault();
 
-                const targetId = link.getAttribute('data-scroll');
-                const section = document.getElementById(targetId);
+                const targetId = $(this).data('scroll');
+                const $section = $('#' + targetId);
 
-                // cerrar menú móvil al hacer click
-                mobileMenu.classList.add('hidden');
+                $mobileMenu.addClass('hidden');
 
-                if (section) {
+                if ($section.length) {
+
                     const offset = 80;
-                    const top = section.getBoundingClientRect().top + window.pageYOffset - offset;
+                    const top = $section.offset().top - offset;
 
-                    window.scrollTo({
-                        top,
-                        behavior: 'smooth'
-                    });
+                    $('html, body').animate({
+                        scrollTop: top
+                    }, 500);
                 }
             });
-        });
-    </script>
 
-    <!-- SCRIPT CARRITO -->
-    <script>
-        $(document).ready(function() {
+
+            /* =====================================================
+               ESTADO GLOBAL
+            ====================================================== */
+
             let cart = JSON.parse(getCookie('cart') || '[]');
             let currentProduct = null;
 
             renderCart();
+            updateConnectionStatus();
 
-            /* ---------- ORDENAR ---------- */
+
+            /* =====================================================
+               PRODUCTOS - AGREGAR AL CARRITO
+            ====================================================== */
+
             $('.btn-order').on('click', function() {
+
                 currentProduct = {
                     id: $(this).data('id'),
                     name: $(this).data('name'),
@@ -671,16 +713,16 @@
 
                 $('#qtyProductName').text(currentProduct.name);
                 $('#qtyInput').val(1);
-                $('#modalQty').addClass('flex').removeClass('hidden');
+                $('#modalQty').removeClass('hidden').addClass('flex');
             });
 
-            $('#closeQty').click(() => $('#modalQty').addClass('hidden'));
+            $('#closeQty').on('click', function() {
+                $('#modalQty').addClass('hidden').removeClass('flex');
+            });
 
-            $('#addToCart').click(() => {
-                let qtyRaw = $('#qtyInput').val();
+            $('#addToCart').on('click', function() {
 
-                // convertir y validar
-                let qty = parseInt(qtyRaw, 10);
+                let qty = parseInt($('#qtyInput').val(), 10);
 
                 if (isNaN(qty) || qty < 1) {
                     showToast('⚠️', 'La cantidad mínima es 1');
@@ -703,32 +745,35 @@
 
                 saveCart();
                 renderCart();
-                $('#modalQty').addClass('hidden');
+                $('#modalQty').addClass('hidden').removeClass('flex');
             });
 
-            /* ---------- CARRITO ---------- */
-            $(document).on('click', '.remove-item', function() {
-                let id = $(this).data('id');
 
+            /* =====================================================
+               CARRITO
+            ====================================================== */
+
+            $(document).on('click', '.remove-item', function() {
+
+                let id = $(this).data('id');
                 cart = cart.filter(p => p.id !== id);
 
                 saveCart();
                 renderCart();
-
                 showToast('🗑️', 'Producto eliminado');
             });
 
-            $('#clearCart').click(function() {
+            $('#clearCart').on('click', function() {
 
                 cart = [];
-
                 saveCart();
                 renderCart();
-
                 showToast('🗑️', 'Carrito vaciado');
             });
 
+
             function renderCart() {
+
                 if (cart.length === 0) {
                     $('#cartBox').addClass('hidden');
                     return;
@@ -736,65 +781,74 @@
 
                 $('#cartBox').removeClass('hidden');
                 $('#cartItems').html('');
+
                 let total = 0;
 
                 cart.forEach(p => {
+
                     total += p.price * p.quantity;
-                    $('#cartItems').append(
-                        `<div class="flex justify-between items-center border-b border-white/10 pb-1">
-    <div>
-        <span>${p.name} x${p.quantity}</span>
-        <div class="text-xs text-white/50">$${(p.price * p.quantity).toFixed(2)}</div>
-    </div>
-    <button class="remove-item text-red-500 text-xs hover:text-red-400"
-        data-id="${p.id}">
-        ✕
-    </button>
-</div>`
-                    );
+
+                    $('#cartItems').append(`
+                <div class="flex justify-between items-center border-b border-white/10 pb-1">
+                    <div>
+                        <span>${p.name} x${p.quantity}</span>
+                        <div class="text-xs text-white/50">
+                            $${(p.price * p.quantity).toFixed(2)}
+                        </div>
+                    </div>
+                    <button class="remove-item text-red-500 text-xs hover:text-red-400"
+                        data-id="${p.id}">
+                        ✕
+                    </button>
+                </div>
+            `);
                 });
 
                 $('#cartTotal').text('$' + total.toFixed(2));
             }
 
-            /* ---------- CHECKOUT ---------- */
-            $('#openCheckout').click(() => $('#modalCheckout').addClass('flex').removeClass('hidden'));
-            $('#closeCheckout').click(() => $('#modalCheckout').addClass('hidden'));
 
-            $('#confirmOrder').click(() => {
+            /* =====================================================
+               CHECKOUT
+            ====================================================== */
+
+            $('#openCheckout').on('click', function() {
+
+                resetCheckoutForm();
+
+                $('#modalCheckout')
+                    .removeClass('hidden')
+                    .addClass('flex');
+            });
+
+            $('#closeCheckout').on('click', function() {
+                $('#modalCheckout').addClass('hidden').removeClass('flex');
+            });
+
+            $('#confirmOrder').on('click', function() {
+
                 let name = $('#clientName').val().trim();
-                let phone = $('#clientPhone').val().trim();
-                let totalPrice = 0;
+                let phoneRaw = $('#clientPhone').val().trim();
+                let phoneDigits = phoneRaw.replace(/\D/g, '');
 
-                let nameRegex = /^[a-zA-ZáéíóúÁÉÍÓÚñÑ\s]{2,}$/;
-                let phoneRegex = /^\+?[0-9]{7,15}$/;
-
-                if (name === '' || phone === '') {
-                    showToast('⚠️', 'Debes ingresar tu nombre y teléfono');
+                if (cart.length === 0) {
+                    showToast('⚠️', 'Debes añadir productos');
                     return;
                 }
 
-                if (!nameRegex.test(name)) {
-                    showToast('⚠️', 'El nombre solo puede contener letras');
+                if (name.length < 2) {
+                    showToast('⚠️', 'Nombre inválido');
                     $('#clientName').focus();
                     return;
                 }
 
-                if (!phoneRegex.test(phone)) {
-                    showToast('⚠️', 'Teléfono inválido');
+                if (phoneDigits.length !== 10) {
+                    showToast('⚠️', 'Número inválido (USA)');
                     $('#clientPhone').focus();
                     return;
                 }
 
-                if (cart.length === 0 || name === '' || phone === '') {
-                    showToast('⚠️', 'Debes añadir productos, nombre y teléfono');
-                    return;
-                }
-
-                cart.forEach(p => {
-                    totalPrice += p.price * p.quantity;
-                });
-
+                let totalPrice = cart.reduce((acc, p) => acc + (p.price * p.quantity), 0);
                 totalPrice = parseFloat(totalPrice.toFixed(2));
 
                 let products = cart.map(p => ({
@@ -802,7 +856,8 @@
                     quantity: p.quantity
                 }));
 
-                $('#confirmOrder').text('Confirmando...').prop('disabled', true);
+                let button = $('#confirmOrder');
+                button.text('Confirmando...').prop('disabled', true);
 
                 $.ajax({
                     url: "<?= base_url('makeOrder'); ?>",
@@ -810,67 +865,84 @@
                     dataType: "json",
                     data: {
                         client_name: name,
-                        client_phone: phone,
+                        client_phone: phoneDigits,
                         products: JSON.stringify(products),
                         total_price: totalPrice
                     },
-                    success: res => {
+                    success: function(res) {
+
                         if (res.error === 0) {
-                            showToast('✅', 'Orden enviada correctamente');
+
+                            showSuccessModal();
+
                             cart = [];
                             saveCart();
                             renderCart();
-                            $('#modalCheckout').addClass('hidden');
+
+                            $('#modalCheckout')
+                                .addClass('hidden')
+                                .removeClass('flex');
+
+                            resetCheckoutForm();
+
                         } else {
                             showToast('⚠️', 'Error al procesar la orden');
-                            $('#confirmOrder').text('Confirmar orden').prop('disabled', false);
                         }
+
+                        button.text('Confirmar orden').prop('disabled', false);
                     },
-                    error: () => {
+                    error: function() {
+
                         showToast('⚠️', 'Error de conexión');
-                        $('#confirmOrder').text('Confirmar orden').prop('disabled', false);
+                        button.text('Confirmar orden').prop('disabled', false);
                     }
                 });
             });
 
-            /* ---------- COOKIE ---------- */
-            function saveCart() {
-                document.cookie = "cart=" + JSON.stringify(cart) + ";path=/;max-age=86400";
+
+            function resetCheckoutForm() {
+                $('#clientName').val('');
+                $('#clientPhone').val('');
+                $('#confirmOrder').text('Confirmar orden').prop('disabled', false);
             }
 
-            function getCookie(name) {
-                let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
-                return match ? match[2] : null;
-            }
+
+            /* =====================================================
+               VALIDACIONES INPUT
+            ====================================================== */
 
             $('#clientName').on('input', function() {
                 this.value = this.value.replace(/[^a-zA-ZáéíóúÁÉÍÓÚñÑ\s]/g, '');
             });
 
             $('#clientPhone').on('input', function() {
-                // permitir solo + y números
-                this.value = this.value.replace(/[^0-9+]/g, '');
 
-                // solo un +
-                if ((this.value.match(/\+/g) || []).length > 1) {
-                    this.value = this.value.replace(/\+/g, '');
-                }
+                let numbers = this.value.replace(/\D/g, '').substring(0, 10);
+                let formatted = '';
 
-                // máximo 15 caracteres
-                if (this.value.length > 15) {
-                    this.value = this.value.slice(0, 15);
-                }
+                if (numbers.length > 0)
+                    formatted = '(' + numbers.substring(0, 3);
+
+                if (numbers.length >= 4)
+                    formatted += ') ' + numbers.substring(3, 6);
+
+                if (numbers.length >= 7)
+                    formatted += '-' + numbers.substring(6, 10);
+
+                this.value = formatted;
             });
 
-            /* ---------- FILTRO POR CATEGORÍA ---------- */
+
+            /* =====================================================
+               FILTRO CATEGORÍAS
+            ====================================================== */
+
             $('.category-tab').on('click', function() {
 
-                // Quitar estilo activo a todos
                 $('.category-tab')
                     .removeClass('bg-red-600 text-white')
                     .addClass('bg-transparent text-gray-600');
 
-                // Agregar estilo activo al seleccionado
                 $(this)
                     .removeClass('bg-transparent text-gray-600')
                     .addClass('bg-red-600 text-white');
@@ -898,46 +970,62 @@
                     });
                 }
             });
-        });
-    </script>
 
-    <?php echo view('components/toast'); ?>
 
-    <!-- OFFLINE SCREEN -->
-    <div id="offlineScreen"
-        class="fixed inset-0 bg-black flex items-center justify-center hidden z-50">
+            /* =====================================================
+               OFFLINE CONTROL
+            ====================================================== */
 
-        <div class="text-center">
-            <h1 class="text-2xl font-bold mb-4">Sin conexión</h1>
-            <p class="text-white/60">Revisa tu conexión a internet.</p>
-        </div>
-    </div>
+            window.addEventListener('offline', updateConnectionStatus);
+            window.addEventListener('online', updateConnectionStatus);
 
-    <script>
-        function updateConnectionStatus() {
-            if (!navigator.onLine) {
-                $('#offlineScreen').removeClass('hidden');
+            function updateConnectionStatus() {
 
-                // 🔒 BLOQUEAR SCROLL
-                document.body.style.overflow = 'hidden';
-                document.documentElement.style.overflow = 'hidden';
-            } else {
-                $('#offlineScreen').addClass('hidden');
+                if (!navigator.onLine) {
 
-                // 🔓 RESTAURAR SCROLL
-                document.body.style.overflow = '';
-                document.documentElement.style.overflow = '';
+                    $('#offlineScreen').removeClass('hidden');
+                    $('body, html').css('overflow', 'hidden');
+
+                } else {
+
+                    $('#offlineScreen').addClass('hidden');
+                    $('body, html').css('overflow', '');
+                }
             }
-        }
 
-        $(document).ready(function() {
-            updateConnectionStatus();
+
+            /* =====================================================
+               COOKIES
+            ====================================================== */
+
+            function saveCart() {
+                document.cookie = "cart=" + encodeURIComponent(JSON.stringify(cart)) + ";path=/;max-age=86400";
+            }
+
+            function getCookie(name) {
+                let match = document.cookie.match(new RegExp('(^| )' + name + '=([^;]+)'));
+                return match ? decodeURIComponent(match[2]) : null;
+            }
+
+            /* =====================================================
+               SUCCESS ORDER MODAL
+            ====================================================== */
+
+            function showSuccessModal() {
+
+                $('#successModal')
+                    .removeClass('hidden')
+                    .addClass('flex');
+
+                setTimeout(function() {
+                    $('#successModal')
+                        .addClass('hidden')
+                        .removeClass('flex');
+                }, 5000);
+            }
+
         });
-
-        window.addEventListener('offline', updateConnectionStatus);
-        window.addEventListener('online', updateConnectionStatus);
     </script>
-
 </body>
 
 </html>

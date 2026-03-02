@@ -236,6 +236,25 @@ class AdminController extends BaseController
         return view('admin/mainAdmin', $data);
     }
 
+    public function refreshOrders()
+    {
+        $data['orders'] = $this->objMainModel->getOrders();
+
+        return view('admin/home/partials/orders_list', $data);
+    }
+
+    public function checkNewOrders()
+    {
+        $lastId = $this->request->getGet('last_id');
+
+        $orders = $this->objMainModel->checkNewOrders($lastId);
+
+        return $this->response->setJSON([
+            'count' => count($orders),
+            'orders' => $orders
+        ]);
+    }
+
     public function updateOrderStatus()
     {
         $order_id = $this->objRequest->getPost('order_id');
