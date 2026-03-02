@@ -148,20 +148,6 @@
         </div>
     </nav>
 
-    <!-- TOAST ALERT -->
-    <div id="appToast" class="fixed top-6 right-6 z-[80] hidden">
-
-        <div class="flex items-center gap-3 
-                bg-neutral-900 border border-white/10
-                px-5 py-4 rounded-xl shadow-2xl
-                min-w-[280px]">
-
-            <div id="toastIcon" class="text-2xl"></div>
-
-            <div id="toastText" class="text-sm font-semibold"></div>
-        </div>
-    </div>
-
     <!-- Espaciador -->
     <div class="h-20"></div>
 
@@ -498,26 +484,6 @@
         </button>
     </div>
 
-    <div id="modalCheckout" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-[60]">
-        <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm relative">
-
-            <button id="closeCheckout" class="absolute top-3 right-3 text-white/60">✕</button>
-
-            <h3 class="text-xl font-bold mb-4">Confirmar orden</h3>
-
-            <input id="clientName" type="text" placeholder="Nombre"
-                class="w-full bg-neutral-800 px-3 py-2 rounded mb-3">
-
-            <input id="clientPhone" type="text" placeholder="Teléfono"
-                class="w-full bg-neutral-800 px-3 py-2 rounded mb-4">
-
-            <button id="confirmOrder"
-                class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold ">
-                Confirmar orden
-            </button>
-        </div>
-    </div>
-
     <footer id="contact" class="bg-black border-t border-white/10 pt-20 pb-10">
         <div class="max-w-7xl mx-auto px-6 grid lg:grid-cols-4 gap-12 text-white/70">
 
@@ -599,59 +565,104 @@
         </div>
     </footer>
 
-    <div id="modalQty" class="fixed inset-0 bg-black/70 hidden items-center justify-center z-[70]">
-        <div class="bg-neutral-900 rounded-xl p-6 w-full max-w-sm text-center relative">
+    <!-- ===============================
+     GLOBAL OVERLAY SYSTEM
+================================ -->
 
-            <button id="closeQty" class="absolute top-3 right-3 text-white/60 hover:text-white">✕</button>
+    <div id="ui-layer" class="fixed inset-0 pointer-events-none z-[9999]">
 
-            <h3 id="qtyProductName" class="text-xl font-bold mb-4"></h3>
-
-            <input
-                type="number"
-                id="qtyInput"
-                min="1"
-                step="1"
-                inputmode="numeric"
-                pattern="[0-9]*"
-                class="w-full bg-neutral-800 px-3 py-2 rounded text-center mb-6">
-
-            <button id="addToCart"
-                class="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold">
-                Añadir al carrito
-            </button>
+        <!-- OFFLINE -->
+        <div id="offlineScreen"
+            class="absolute inset-0 bg-black hidden items-center justify-center pointer-events-auto">
+            <div class="text-center text-white">
+                <h1 class="text-2xl font-bold mb-4">Sin conexión</h1>
+                <p class="text-white/60">Revisa tu conexión a internet.</p>
+            </div>
         </div>
-    </div>
 
-    <?php echo view('components/toast'); ?>
+        <!-- CHECKOUT MODAL -->
+        <div id="modalCheckout"
+            class="absolute inset-0 bg-black/70 hidden items-center justify-center pointer-events-auto">
 
-    <!-- OFFLINE SCREEN -->
-    <div id="offlineScreen"
-        class="fixed inset-0 bg-black flex items-center justify-center hidden z-50">
+            <div class="bg-neutral-900 rounded-2xl p-6 w-full max-w-sm relative shadow-2xl">
 
-        <div class="text-center">
-            <h1 class="text-2xl font-bold mb-4">Sin conexión</h1>
-            <p class="text-white/60">Revisa tu conexión a internet.</p>
+                <button id="closeCheckout"
+                    class="absolute top-3 right-3 text-white/60 hover:text-white text-lg">
+                    ✕
+                </button>
+
+                <h3 class="text-xl font-bold mb-4">Confirmar orden</h3>
+
+                <input id="clientName" type="text" placeholder="Nombre"
+                    class="w-full bg-neutral-800 px-3 py-2 rounded mb-3">
+
+                <input id="clientPhone" type="text" placeholder="Teléfono"
+                    class="w-full bg-neutral-800 px-3 py-2 rounded mb-4">
+
+                <button id="confirmOrder"
+                    class="w-full bg-green-600 hover:bg-green-700 py-2 rounded font-bold">
+                    Confirmar orden
+                </button>
+            </div>
         </div>
-    </div>
 
-    <!-- SUCCESS MODAL -->
-    <div id="successModal"
-        class="fixed inset-0 bg-black/70 hidden items-center justify-center z-[90]">
+        <!-- CANTIDAD MODAL -->
+        <div id="modalQty"
+            class="absolute inset-0 bg-black/70 hidden items-center justify-center pointer-events-auto">
 
-        <div class="bg-neutral-900 
-                rounded-2xl px-10 py-10 text-center 
-                shadow-2xl max-w-sm w-full">
+            <div class="bg-neutral-900 rounded-2xl p-6 w-full max-w-sm text-center relative shadow-2xl">
 
-            <div class="text-5xl mb-4">✅</div>
+                <button id="closeQty"
+                    class="absolute top-3 right-3 text-white/60 hover:text-white text-lg">
+                    ✕
+                </button>
 
-            <h3 class="text-2xl font-bold text-green-400 mb-2">
-                ¡Orden realizada!
-            </h3>
+                <h3 id="qtyProductName" class="text-xl font-bold mb-4"></h3>
 
-            <p class="text-white/70">
-                Su orden fue realizada con éxito.
-            </p>
+                <input type="number"
+                    id="qtyInput"
+                    min="1"
+                    class="w-full bg-neutral-800 px-3 py-2 rounded text-center mb-6">
+
+                <button id="addToCart"
+                    class="w-full bg-red-600 hover:bg-red-700 py-2 rounded font-semibold">
+                    Añadir al carrito
+                </button>
+            </div>
         </div>
+
+        <!-- SUCCESS MODAL -->
+        <div id="successModal"
+            class="absolute inset-0 bg-black/70 hidden items-center justify-center pointer-events-auto">
+
+            <div class="bg-neutral-900 rounded-2xl px-10 py-10 text-center shadow-2xl max-w-sm w-full">
+
+                <div class="text-5xl mb-4">✅</div>
+
+                <h3 class="text-2xl font-bold text-green-400 mb-2">
+                    ¡Orden realizada!
+                </h3>
+
+                <p class="text-white/70">
+                    Su orden fue realizada con éxito.
+                </p>
+            </div>
+        </div>
+
+        <!-- TOAST -->
+        <div id="appToast"
+            class="absolute top-6 right-6 hidden pointer-events-auto">
+
+            <div class="flex items-center gap-3 
+                    bg-neutral-900 border border-white/10
+                    px-5 py-4 rounded-xl shadow-2xl
+                    min-w-[280px]">
+
+                <div id="toastIcon" class="text-2xl"></div>
+                <div id="toastText" class="text-sm font-semibold"></div>
+            </div>
+        </div>
+
     </div>
 
     <script>
@@ -697,6 +708,19 @@
 
             renderCart();
             updateConnectionStatus();
+
+            function showToast(icon, message) {
+                $('#toastIcon').text(icon);
+                $('#toastText').text(message);
+
+                $('#appToast')
+                    .removeClass('hidden')
+                    .fadeIn(200);
+
+                setTimeout(function() {
+                    $('#appToast').fadeOut(200);
+                }, 3000);
+            }
 
 
             /* =====================================================
