@@ -104,6 +104,9 @@
         }
     </style>
 
+    <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-8921374874744505"
+     crossorigin="anonymous"></script>
+
 </head>
 
 <body class="bg-neutral-950 text-white overflow-x-hidden">
